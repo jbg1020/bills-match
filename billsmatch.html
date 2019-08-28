@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   <script src="main.js"></script>
-  <title>Buffalo Bills Match Game</title>
+  <title>Buffalo Bills Matching Game</title>
 </head>
-<body>
 
+<body>
+  <header>
+    <h1>Buffalo Bills Matching Game!</h1>
+  </header>
+  <aside>
+    <div class="stats">Stats</div>
+    <div class="stat-box">Games Played:</div>
+    <div class="stat-box" id="num-games-played">0</div> <!-- "#" for games played -->
+    <div class="stat-box">Attempts:</div>
+    <div class="stat-box" id="num-attempts">0</div> <!-- "#" for attempts -->
+    <div class="stat-box">Accuracy:</div>
+    <div class="stat-box" id="pct-accurate">0%</div> <!-- "%" for accuracy -->
+  </aside>
+  <main>
+    <div class="card-container"> <!-- holds all cards -->
+      <div class="card"> <!-- the actual card -->
+        <div class="back face"></div>
+        <div class="front face"></div>
+      </div> <!-- closing tag for .card -->
+    </div> <!-- closing tag for .card-container -->
+  </main>
 </body>
+
 </html>
