@@ -1,0 +1,44 @@
+header {
+    border: 1px solid black;
+}
+
+h1 {
+    border: 1px solid chartreuse;
+}
+
+aside {
+    border: 1px solid pink;
+    display: inline-block;
+    width: 20%;
+    height: 85%;
+    text-align: center;
+    vertical-align: top;
+}
+
+.stats {
+    border: 1px solid green;
+    font-size: 7vh;/*2.5rem;*/
+    /* text-shadow:
+            -1px -1px 0 white,
+            1px -1px 0 white,
+            -1px 1px 0 white,
+            1px 1px 0 white; */
+}
+
+.stat-box {
+    border: 1px solid blue;
+}
+
+.card-container {
+    border: 1px solid purple;
+    height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    border: 1px solid red;
+    height: 33.33%;
+    width: 16.6%;
+    position: relative;
+}
