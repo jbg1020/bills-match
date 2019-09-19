@@ -29,9 +29,18 @@ aside {
     border: 1px solid blue;
 }
 
+main {
+    display: inline-block;
+    border: 1px solid hotpink;
+    height: 100%;
+    width: 78%;
+}
+
 .card-container {
     border: 1px solid purple;
-    height: 80vh;
+    /* height: 100px; */
+    /* width: 80%; */
+    /* height: 100%; */
     display: flex;
     flex-wrap: wrap;
 }
@@ -53,5 +62,5 @@ aside {
     background-position: center;
     margin: auto;
     border-radius: 15px;
+    background-color: blue;
     /*position: relative;*/
-} */
