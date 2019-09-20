@@ -9,8 +9,8 @@ h1 {
 aside {
     border: 1px solid pink;
     display: inline-block;
-    width: 20%;
-    height: 85%;
+    width: 20vw;
+    height: 42vh;
     text-align: center;
     vertical-align: top;
 }
@@ -32,35 +32,81 @@ aside {
 main {
     display: inline-block;
     border: 1px solid hotpink;
-    height: 100%;
-    width: 78%;
+    height: 75vh;
+    width: 76vw;
 }
 
 .card-container {
     border: 1px solid purple;
-    /* height: 100px; */
     /* width: 80%; */
-    /* height: 100%; */
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
 .card {
     border: 1px solid red;
-    height: 33.33%;
-    width: 16.6%;
+    height: 32%;
+    width: 15.5%;
     position: relative;
+    left: 2%;
 }
 
-/* .face {
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    height: 90%;
-    background-size: cover;
-    background-repeat: no-repeat;
+.face {
     background-position: center;
-    margin: auto;
-    border-radius: 15px;
-    background-color: blue;
-    /*position: relative;*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.back {
+    background-image: url('./images/card-back.PNG');
+    position: absolute;
+    z-index: 1;
+}
+
+.front {
+    position: absolute;
+}
+
+.a {
+    background-image: url('./images/1.PNG');
+}
+
+.b {
+    background-image: url('./images/2.PNG');
+}
+
+.c {
+    background-image: url('./images/3.PNG');
+}
+
+.d {
+    background-image: url('./images/4.PNG');
+}
+
+.e {
+    background-image: url('./images/5.PNG');
+}
+
+.f {
+    background-image: url('./images/6.PNG');
+}
+
+.g {
+    background-image: url('./images/7.PNG');
+}
+
+.h {
+    background-image: url('./images/8.PNG');
+}
+
+.i {
+    background-image: url('./images/9.PNG');
+}
+
+.hidden {
+    display: none;
+}
