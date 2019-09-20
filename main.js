@@ -7,19 +7,13 @@ var maxMatched = 9;                                                 // when uMat
 var uAttempts = 0;                                                  // cardClickOne / cardClickTwo
 var uGamesPlayed = 0;                                               // increment +1 when uMatched = maxMatched
 var cardArray = [                                                   // these are the classes that correlate with the hidden images
-    'a','b','c','d','e','f','g','h','i',
-    'a','b','c','d','e','f','g','h','i'
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
 ];
 
 function initializeApp() {
     shuffleCards();
     $('.card').on("click", cardClickHandler);
-}
-
-function cardClickHandler(event) {
-    $(this).find('.back').addClass('hidden');
-    console.log('click registered:', event);
-    // conditionals
 }
 
 function shuffleCards() {  // shuffles cardArray order
@@ -38,5 +32,23 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
         // var cardClass = `<div class="card cardArray[arrIndex]   `
         $(cardDiv).appendTo(".card-container");
         console.log("single item?:", cardArray[arrIndex]);
+    }
+}
+
+function cardClickHandler(event) {
+    // $(this).find('.back').addClass('hidden');
+    $(this).find('.face:nth-child(1)').addClass("hidden");
+    if (cardClickOne === null) {
+        cardClickOne = $(this).find('.face:nth-child(2)');
+        console.log(cardClickOne.css('background-image'));
+    } else if (cardClickTwo === null) {
+        cardClickTwo = $(this).find('.face:nth-child(2)');
+        console.log(cardClickTwo.css('background-image'))
+        if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
+            uMatched++;
+            console.log('Matched! uMatched===', uMatched);
+        }
+        cardClickOne = null;
+        cardClickTwo = null;
     }
 }
