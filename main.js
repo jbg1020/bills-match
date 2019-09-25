@@ -41,6 +41,7 @@ function cardClickHandler(event) {
         $(this).find('.face:nth-child(1)').addClass("hidden");
         if (cardClickOne === null) {
             cardClickOne = $(this).find('.face:nth-child(2)');
+            // debugger;
             console.log('card1::', cardClickOne.css('background-image'))
         }
         else if (cardClickTwo === null) {
@@ -49,28 +50,26 @@ function cardClickHandler(event) {
             // console.log('cardClickTwo if clicked; cardClickTwo ===', cardClickTwo)
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 uMatched++;
+                cardClickOne = null;
+                cardClickTwo = null;
                 console.log('Matched! uMatched===', uMatched);
             } else {
-                $(".card").click(function () {
-                    $("div").off("click");
-                });
                 setTimeout(function () {
-                    cardClickOne.prev().removeClass("hidden"); // Uncaught TypeError: Cannot read property 'prev' of null
+                    // $(".card").click(function () {
+                    //     $("div").off("click");
+                    // });
+                    cardClickOne.prev().removeClass("hidden");
                     cardClickTwo.prev().removeClass("hidden");
                     console.log("No match!");
                     cardClickOne = null;
                     cardClickTwo = null;
                 }, 1500);
             }
-            console.log('card2::', cardClickTwo.css('background-image'))
-            // cardClickOne = null;
-            // cardClickTwo = null;
+            console.log('card2::', cardClickTwo.css('background-image'))            
         }
-
-
-
     }
     uAttempts++
+
     // cardClickOne.prev().removeClass("hidden");
     // cardClickTwo.prev().removeClass("hidden");
     // console.log('cards 1/2 before being reset:', cardClickOne,cardClickTwo)
