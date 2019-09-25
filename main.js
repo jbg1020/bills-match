@@ -10,6 +10,7 @@ var cardArray = [                       // these are the classes that correlate 
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
 ];
+var canClickMouse = true;
 
 function initializeApp() {
     shuffleCards();
@@ -35,9 +36,11 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
 }
 
 function cardClickHandler(event) {
-    if ($(event.target).hasClass('front')) {
-        return
-    } else {
+    if ($(event.target).hasClass('front')) 
+        return;
+    if (!canClickMouse)
+        return;
+    else {
         $(this).find('.face:nth-child(1)').addClass("hidden");
         if (cardClickOne === null) {
             cardClickOne = $(this).find('.face:nth-child(2)');
@@ -46,31 +49,27 @@ function cardClickHandler(event) {
         }
         else if (cardClickTwo === null) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
-            // console.log('event.target::', event.target)
-            // console.log('cardClickTwo if clicked; cardClickTwo ===', cardClickTwo)
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 uMatched++;
                 cardClickOne = null;
                 cardClickTwo = null;
                 console.log('Matched! uMatched===', uMatched);
             } else {
-                setTimeout(function () {
-                    // $(".card").click(function () {
-                    //     $("div").off("click");
-                    // });
-                    cardClickOne.prev().removeClass("hidden");
-                    cardClickTwo.prev().removeClass("hidden");
-                    console.log("No match!");
-                    cardClickOne = null;
-                    cardClickTwo = null;
-                }, 1500);
+                canClickMouse = false;
+                console.log('card2::', cardClickTwo.css('background-image'))
+                setTimeout(flipBackMismatch, 1000);
             }
-            console.log('card2::', cardClickTwo.css('background-image'))            
         }
     }
-    uAttempts++
+    // uAttempts++  //counts every click here
+    // console.log('attempts #:', uAttempts);
+}
 
-    // cardClickOne.prev().removeClass("hidden");
-    // cardClickTwo.prev().removeClass("hidden");
-    // console.log('cards 1/2 before being reset:', cardClickOne,cardClickTwo)
+function flipBackMismatch () {
+        cardClickOne.prev().removeClass("hidden");
+        cardClickTwo.prev().removeClass("hidden");
+        console.log("No match!");
+        cardClickOne = null;
+        cardClickTwo = null;
+        canClickMouse = true;
 }
