@@ -29,29 +29,49 @@ function shuffleCards() {  // shuffles cardArray order
 function renderCardDivs() { // creates divs in random order from shuffleCards function
     for (var arrIndex = 0; arrIndex < cardArray.length; arrIndex++) {
         var cardDiv = `<div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div>`;
-        // var cardClass = `<div class="card cardArray[arrIndex]   `
         $(cardDiv).appendTo(".card-container");
-        console.log("single item?:", cardArray[arrIndex]);
+        // console.log("single item?:", cardArray[arrIndex]);
     }
 }
 
 function cardClickHandler(event) {
-    // $(this).find('.back').addClass('hidden');
-    $(this).find('.face:nth-child(1)').addClass("hidden");
-    if (cardClickOne === null) {
-        cardClickOne = $(this).find('.face:nth-child(2)');
-        console.log(cardClickOne.css('background-image'));
-    } else if (cardClickTwo === null) {
-        cardClickTwo = $(this).find('.face:nth-child(2)');
-        console.log(cardClickTwo.css('background-image'))
-        if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
-            uMatched++;
-            console.log('Matched! uMatched===', uMatched);
+    if ($(event.target).hasClass('front')) {
+        return
+    } else {
+        $(this).find('.face:nth-child(1)').addClass("hidden");
+        if (cardClickOne === null) {
+            cardClickOne = $(this).find('.face:nth-child(2)');
+            console.log('card1::', cardClickOne.css('background-image'))
         }
-        uAttempts++
-        cardClickOne = null;
-        cardClickTwo = null;
-    }
-}
+        else if (cardClickTwo === null) {
+            cardClickTwo = $(this).find('.face:nth-child(2)');
+            // console.log('event.target::', event.target)
+            // console.log('cardClickTwo if clicked; cardClickTwo ===', cardClickTwo)
+            if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
+                uMatched++;
+                console.log('Matched! uMatched===', uMatched);
+            } else {
+                $(".card").click(function () {
+                    $("div").off("click");
+                });
+                setTimeout(function () {
+                    cardClickOne.prev().removeClass("hidden"); // Uncaught TypeError: Cannot read property 'prev' of null
+                    cardClickTwo.prev().removeClass("hidden");
+                    console.log("No match!");
+                    cardClickOne = null;
+                    cardClickTwo = null;
+                }, 1500);
+            }
+            console.log('card2::', cardClickTwo.css('background-image'))
+            // cardClickOne = null;
+            // cardClickTwo = null;
+        }
 
-// work on re-hiding the cards after missing
+
+
+    }
+    uAttempts++
+    // cardClickOne.prev().removeClass("hidden");
+    // cardClickTwo.prev().removeClass("hidden");
+    // console.log('cards 1/2 before being reset:', cardClickOne,cardClickTwo)
+}
