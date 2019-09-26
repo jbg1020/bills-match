@@ -36,7 +36,7 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
 }
 
 function cardClickHandler(event) {
-    if ($(event.target).hasClass('front')) 
+    if ($(event.target).hasClass('front'))
         return;
     if (!canClickMouse)
         return;
@@ -53,23 +53,28 @@ function cardClickHandler(event) {
                 uMatched++;
                 cardClickOne = null;
                 cardClickTwo = null;
-                console.log('Matched! uMatched===', uMatched);
+                console.log('Matched! uMatched:', uMatched);
             } else {
                 canClickMouse = false;
                 console.log('card2::', cardClickTwo.css('background-image'))
                 setTimeout(flipBackMismatch, 1000);
             }
+            uAttempts++
+            console.log('attempts #:', uAttempts);
+            console.log('accuracy:', calculateAccuracy()+'%');
         }
     }
-    // uAttempts++  //counts every click here
-    // console.log('attempts #:', uAttempts);
 }
 
-function flipBackMismatch () {
-        cardClickOne.prev().removeClass("hidden");
-        cardClickTwo.prev().removeClass("hidden");
-        console.log("No match!");
-        cardClickOne = null;
-        cardClickTwo = null;
-        canClickMouse = true;
+function flipBackMismatch() {
+    cardClickOne.prev().removeClass("hidden");
+    cardClickTwo.prev().removeClass("hidden");
+    console.log("No match!");
+    cardClickOne = null;
+    cardClickTwo = null;
+    canClickMouse = true;
+}
+
+function calculateAccuracy () {
+    return Math.round(uMatched/uAttempts*100);
 }
