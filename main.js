@@ -54,6 +54,10 @@ function cardClickHandler(event) {
                 cardClickOne = null;
                 cardClickTwo = null;
                 console.log('Matched! uMatched:', uMatched);
+                if (uMatched === maxMatched) {
+                    uGamesPlayed++
+                    console.log("You Won!");
+                }
             } else {
                 canClickMouse = false;
                 console.log('card2::', cardClickTwo.css('background-image'))
@@ -81,7 +85,7 @@ function calculateAccuracy () {
 }
 
 function displayStats () {
-    // $('#num-games-played').text(games_played);
+    $('#num-games-played').text(uGamesPlayed);
     $('#num-attempts').text(uAttempts);
     $('#pct-accurate').text(calculateAccuracy() +"%");
 }
