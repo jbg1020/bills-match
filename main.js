@@ -60,6 +60,7 @@ function cardClickHandler(event) {
                 setTimeout(flipBackMismatch, 1000);
             }
             uAttempts++
+            displayStats();
             console.log('attempts #:', uAttempts);
             console.log('accuracy:', calculateAccuracy()+'%');
         }
@@ -77,4 +78,10 @@ function flipBackMismatch() {
 
 function calculateAccuracy () {
     return Math.round(uMatched/uAttempts*100);
+}
+
+function displayStats () {
+    // $('#num-games-played').text(games_played);
+    $('#num-attempts').text(uAttempts);
+    $('#pct-accurate').text(calculateAccuracy() +"%");
 }
