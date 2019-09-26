@@ -63,6 +63,7 @@ function cardClickHandler(event) {
             displayStats();
             console.log('attempts #:', uAttempts);
             console.log('accuracy:', calculateAccuracy()+'%');
+            console.log('event.delegateTarget:', event.delegateTarget)
         }
     }
 }

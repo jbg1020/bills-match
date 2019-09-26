@@ -1,3 +1,12 @@
+@font-face {
+    font-family: "Scoreboard";
+    src: url('./fonts/scoreboard-font.ttf') format("truetype");
+}
+
+body {
+    background-image: url('./images/bg2.jpg');
+}
+
 header {
     border: 1px solid black;
 }
@@ -7,17 +16,20 @@ h1 {
 }
 
 aside {
+    background-color: navy;
+    font-family: 'Scoreboard', Arial, sans-serif;
     border: 1px solid pink;
     display: inline-block;
     width: 20vw;
-    height: 42vh;
+    height: 100%;
     text-align: center;
     vertical-align: top;
 }
 
 .stats {
+    color: white;
     border: 1px solid green;
-    font-size: 7vh;/*2.5rem;*/
+    font-size: 8vh;/*2.5rem;*/
     /* text-shadow:
             -1px -1px 0 white,
             1px -1px 0 white,
@@ -26,18 +38,19 @@ aside {
 }
 
 .stat-box {
-    border: 1px solid blue;
+    color: gold;
+    /* border: 1px solid blue; */
 }
 
 main {
     display: inline-block;
-    border: 1px solid hotpink;
+    /* border: 1px solid hotpink; */
     height: 75vh;
     width: 76vw;
 }
 
 .card-container {
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     /* width: 80%; */
     height: 100%;
     display: flex;
@@ -45,7 +58,7 @@ main {
 }
 
 .card {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 32%;
     width: 15.5%;
     position: relative;
@@ -62,7 +75,7 @@ main {
 }
 
 .back {
-    background-image: url('./images/card-back.PNG');
+    background-image: url('./images/back.PNG');
     position: absolute;
     z-index: 1;
 }
