@@ -5,6 +5,7 @@
 
 body {
     background-image: url('./images/bg2.jpg');
+    background-size: 16%;
 }
 
 header {
@@ -59,7 +60,8 @@ main {
 }
 
 .card-wrapper {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    margin: 0.38%;
     height: 32%;
     width: 15.5%;
     position: relative;
@@ -76,7 +78,7 @@ main {
 
 .face {
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
