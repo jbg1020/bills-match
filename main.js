@@ -29,7 +29,7 @@ function shuffleCards() {  // shuffles cardArray order
 
 function renderCardDivs() { // creates divs in random order from shuffleCards function
     for (var arrIndex = 0; arrIndex < cardArray.length; arrIndex++) {
-        var cardDiv = `<div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div>`;
+        var cardDiv = `<div class="card-wrapper"><div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div></div>`;
         $(cardDiv).appendTo(".card-container");
         // console.log("single item?:", cardArray[arrIndex]);
     }

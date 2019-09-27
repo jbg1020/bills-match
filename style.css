@@ -5,6 +5,7 @@
 
 body {
     background-image: url('./images/bg2.jpg');
+    background-size: 16%;
 }
 
 header {
@@ -16,7 +17,7 @@ h1 {
 }
 
 aside {
-    background-color: navy;
+    background-color: rgb(0, 51, 0);
     font-family: 'Scoreboard', Arial, sans-serif;
     border: 1px solid pink;
     display: inline-block;
@@ -39,6 +40,7 @@ aside {
 
 .stat-box {
     color: gold;
+    font-size: 4.5vh;
     /* border: 1px solid blue; */
 }
 
@@ -50,29 +52,38 @@ main {
 }
 
 .card-container {
-    /* border: 1px solid purple; */
-    /* width: 80%; */
+    border: 1px solid purple;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
-.card {
+.card-wrapper {
     /* border: 1px solid red; */
+    margin: 0.38%;
     height: 32%;
     width: 15.5%;
     position: relative;
     left: 2%;
 }
 
+.card {
+    /* border: 1px solid red; */
+    height: 100%;
+    width: 100%;
+    /* position: relative; */
+    /* left: 2%; */
+}
+
 .face {
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     position: absolute;
-}
+} /* mess with the container /card relationship stuff*/
 
 .back {
     background-image: url('./images/back.PNG');
