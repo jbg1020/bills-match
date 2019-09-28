@@ -36,17 +36,18 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
 }
 
 function winModal() {
-
-var wooHoo = `<div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>YOU WON</h2>
-              </div>`;
-              $(wooHoo).appendTo(".modal");
-              $('.modal').show();
-
-
-
-
+    var wooHoo = `<div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>YOU WON</h2>
+                </div>`;
+                $(wooHoo).appendTo(".modal");
+                $('.modal').show();
+    var span = $('.close')[0];
+    span.onclick = function() {
+        $('.modal').hide();
+    }
+    // BUTTON TO PLAY AGAIN/NOT PLAY
+    // DESIGN
 }
 
 function cardClickHandler(event) {
@@ -72,7 +73,6 @@ function cardClickHandler(event) {
                     uGamesPlayed++
                     console.log("You Won!");
                     winModal();
-                    // execute winModal
                 }
             } else {
                 canClickMouse = false;
