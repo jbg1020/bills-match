@@ -35,6 +35,20 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
     }
 }
 
+function winModal() {
+
+var wooHoo = `<div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>YOU WON</h2>
+              </div>`;
+              $(wooHoo).appendTo(".modal");
+              $('.modal').show();
+
+
+
+
+}
+
 function cardClickHandler(event) {
     if ($(event.target).hasClass('front'))
         return;
@@ -57,6 +71,8 @@ function cardClickHandler(event) {
                 if (uMatched === maxMatched) {
                     uGamesPlayed++
                     console.log("You Won!");
+                    winModal();
+                    // execute winModal
                 }
             } else {
                 canClickMouse = false;
@@ -66,7 +82,7 @@ function cardClickHandler(event) {
             uAttempts++
             displayStats();
             console.log('attempts #:', uAttempts);
-            console.log('accuracy:', calculateAccuracy()+'%');
+            console.log('accuracy:', calculateAccuracy() + '%');
             console.log('event.delegateTarget:', event.delegateTarget)
         }
     }
@@ -81,12 +97,12 @@ function flipBackMismatch() {
     canClickMouse = true;
 }
 
-function calculateAccuracy () {
-    return Math.round(uMatched/uAttempts*100);
+function calculateAccuracy() {
+    return Math.round(uMatched / uAttempts * 100);
 }
 
-function displayStats () {
+function displayStats() {
     $('#num-games-played').text(uGamesPlayed);
     $('#num-attempts').text(uAttempts);
-    $('#pct-accurate').text(calculateAccuracy() +"%");
+    $('#pct-accurate').text(calculateAccuracy() + "%");
 }
