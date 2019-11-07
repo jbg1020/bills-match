@@ -3,13 +3,14 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 9;                     // when uMatched = this, game won
+var maxMatched = 2;                     // when uMatched = this, game won
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
-var cardArray = [                       // these are the classes that correlate with the hidden images
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
-];
+// var cardArray = [                       // these are the classes that correlate with the hidden images
+//     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+//     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
+// ];
+var cardArray = ['a','b','a', 'b'];
 var canClickMouse = true;
 
 function initializeApp() {
@@ -39,14 +40,29 @@ function winModal() {
     var wooHoo = `<div class="modal-content">
                     <span class="close">&times;</span>
                     <h2>YOU WON</h2>
+                    <div class = "replay">PLAY AGAIN?</div>
+                    <div class="quit">QUIT</div>
                 </div>`;
                 $(wooHoo).appendTo(".modal");
                 $('.modal').show();
+
     var span = $('.close')[0];
+    var playAgain = $('.replay')[0];
+    var resetQuit = $('.quit')[0];
+
     span.onclick = function() {
         $('.modal').hide();
     }
-    // BUTTON TO PLAY AGAIN/NOT PLAY
+
+    playAgain.onclick = function() {
+        $('.modal').hide();
+        shuffleCards(); //adding new cards but not removing old ones, cannot click
+    }
+    
+    resetQuit.onclick = function() {
+        $('.modal').hide();
+        initializeApp();  //adding new cards but not removing old ones, can click, keeps stats going, but no subsequent win modal
+    }
     // DESIGN
 }
 
