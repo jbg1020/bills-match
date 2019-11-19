@@ -41,7 +41,6 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
 
 function winModal() {
     var wooHoo = `<div class="modal-content">
-                    <span class="close">&times;</span>
                     <h2>YOU WON</h2>
                     <div class = "replay">PLAY AGAIN?</div>
                     <div class="quit">QUIT</div>
@@ -49,18 +48,32 @@ function winModal() {
                 $(wooHoo).appendTo(".modal");
                 $('.modal').show();
 
-    var span = $('.close')[0];
     var playAgain = $('.replay')[0];
     var resetQuit = $('.quit')[0];
 
-    span.onclick = function() {
-        $('.modal').hide();
-    }
-
     playAgain.onclick = function() {
         continueGame();
+    }    
+    resetQuit.onclick = function() {
+        resetGame();
     }
-    
+}
+
+function loseModal() {
+    var wompWomp = `<div class="modal-content lost-modal">
+                    <h2>You Lost :(</h2>
+                    <div class = "replay">PLAY AGAIN?</div>
+                    <div class="quit">QUIT</div>
+                </div>`;
+                $(wompWomp).appendTo(".modal");
+                $('.modal').show();
+
+    var playAgain = $('.replay')[0];
+    var resetQuit = $('.quit')[0];
+
+    playAgain.onclick = function() {
+        resetGame();
+    }    
     resetQuit.onclick = function() {
         resetGame();
     }
@@ -94,7 +107,11 @@ function cardClickHandler(event) {
             } else {
                 canClickMouse = false;
                 numDowns++;
-                console.log('card2::', cardClickTwo.css('background-image'))
+                if (numDowns === 5) {
+                    loseModal();
+                    // show lose modal
+                }
+                // console.log('card2::', cardClickTwo.css('background-image'))
                 setTimeout(flipBackMismatch, 1000);
             }
             uAttempts++;
@@ -149,6 +166,7 @@ function resetGame() {
     maxMatched = 2 // 8;
     uAttempts = 0;
     uGamesPlayed = 0;
+    numDowns = 1;
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
@@ -158,7 +176,7 @@ function resetGame() {
 function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
-    maxMatched += 2;
+    maxMatched += 2; // 8
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
