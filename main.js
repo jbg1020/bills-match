@@ -3,13 +3,14 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 9;                     // when uMatched = this, game won
+var maxMatched = 8;                     // when uMatched = this, game won
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
 var cardArray = [                       // these are the classes that correlate with the hidden images
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
 ];
+// var cardArray = ['a','b','a', 'b']; // small size for testing
 var canClickMouse = true;
 
 function initializeApp() {
@@ -28,6 +29,7 @@ function shuffleCards() {  // shuffles cardArray order
 }
 
 function renderCardDivs() { // creates divs in random order from shuffleCards function
+    $( ".card-wrapper" ).remove();
     for (var arrIndex = 0; arrIndex < cardArray.length; arrIndex++) {
         var cardDiv = `<div class="card-wrapper"><div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div></div>`;
         $(cardDiv).appendTo(".card-container");
@@ -39,15 +41,27 @@ function winModal() {
     var wooHoo = `<div class="modal-content">
                     <span class="close">&times;</span>
                     <h2>YOU WON</h2>
+                    <div class = "replay">PLAY AGAIN?</div>
+                    <div class="quit">QUIT</div>
                 </div>`;
                 $(wooHoo).appendTo(".modal");
                 $('.modal').show();
+
     var span = $('.close')[0];
+    var playAgain = $('.replay')[0];
+    var resetQuit = $('.quit')[0];
+
     span.onclick = function() {
         $('.modal').hide();
     }
-    // BUTTON TO PLAY AGAIN/NOT PLAY
-    // DESIGN
+
+    playAgain.onclick = function() {
+        continueGame();
+    }
+    
+    resetQuit.onclick = function() {
+        resetGame();
+    }
 }
 
 function cardClickHandler(event) {
@@ -98,6 +112,9 @@ function flipBackMismatch() {
 }
 
 function calculateAccuracy() {
+    if (uAttempts === 0) {
+        return 0;
+    }
     return Math.round(uMatched / uAttempts * 100);
 }
 
@@ -105,4 +122,26 @@ function displayStats() {
     $('#num-games-played').text(uGamesPlayed);
     $('#num-attempts').text(uAttempts);
     $('#pct-accurate').text(calculateAccuracy() + "%");
+}
+
+function resetGame() {
+    cardClickOne = null;
+    cardClickTwo = null;
+    uMatched = 0;
+    maxMatched = 8;
+    uAttempts = 0;
+    uGamesPlayed = 0;
+    $('.modal').hide();
+    $(".modal-content").remove();
+    initializeApp();
+    displayStats();
+}
+
+function continueGame() {
+    cardClickOne = null;
+    cardClickTwo = null;
+    maxMatched += 2;
+    $('.modal').hide();
+    $(".modal-content").remove();
+    initializeApp();
 }
