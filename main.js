@@ -3,7 +3,7 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 2;                     // when uMatched = this, game won
+var maxMatched = 2;     // 8                // when uMatched = this, game won
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
 // var cardArray = [                       // these are the classes that correlate with the hidden images
@@ -29,6 +29,7 @@ function shuffleCards() {  // shuffles cardArray order
 }
 
 function renderCardDivs() { // creates divs in random order from shuffleCards function
+    $( ".card-wrapper" ).remove();
     for (var arrIndex = 0; arrIndex < cardArray.length; arrIndex++) {
         var cardDiv = `<div class="card-wrapper"><div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div></div>`;
         $(cardDiv).appendTo(".card-container");
@@ -56,12 +57,13 @@ function winModal() {
 
     playAgain.onclick = function() {
         $('.modal').hide();
-        shuffleCards(); //adding new cards but not removing old ones, cannot click
+        $(".modal-content").remove();
+        maxMatched += 2; // 8
+        shuffleCards(); // getting new cards; cannot click
     }
     
     resetQuit.onclick = function() {
-        $('.modal').hide();
-        initializeApp();  //adding new cards but not removing old ones, can click, keeps stats going, but no subsequent win modal
+        quitGame(); //
     }
     // DESIGN
 }
@@ -114,6 +116,9 @@ function flipBackMismatch() {
 }
 
 function calculateAccuracy() {
+    if (uAttempts === 0) {
+        return 0;
+    }
     return Math.round(uMatched / uAttempts * 100);
 }
 
@@ -121,4 +126,17 @@ function displayStats() {
     $('#num-games-played').text(uGamesPlayed);
     $('#num-attempts').text(uAttempts);
     $('#pct-accurate').text(calculateAccuracy() + "%");
+}
+
+function quitGame() {
+    cardClickOne = null;
+    cardClickTwo = null;
+    uMatched = 0;
+    maxMatched = 2;     // 8
+    uAttempts = 0;
+    uGamesPlayed = 0;
+    $('.modal').hide();
+    $(".modal-content").remove();
+    initializeApp();
+    displayStats();
 }
