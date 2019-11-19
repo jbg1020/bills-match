@@ -39,6 +39,12 @@ aside {
     /* border: 1px solid blue; */
 }
 
+#down {
+    /* border: 2px dashed red; */
+    color: darkorange;
+}
+
+
 main {
     display: inline-block;
     /* border: 1px solid hotpink; */
