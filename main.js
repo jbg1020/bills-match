@@ -3,14 +3,14 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 2;     // 8                // when uMatched = this, game won
+var maxMatched = 8;                     // when uMatched = this, game won
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
-// var cardArray = [                       // these are the classes that correlate with the hidden images
-//     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-//     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
-// ];
-var cardArray = ['a','b','a', 'b'];
+var cardArray = [                       // these are the classes that correlate with the hidden images
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
+];
+// var cardArray = ['a','b','a', 'b']; // small size for testing
 var canClickMouse = true;
 
 function initializeApp() {
@@ -56,16 +56,12 @@ function winModal() {
     }
 
     playAgain.onclick = function() {
-        $('.modal').hide();
-        $(".modal-content").remove();
-        maxMatched += 2; // 8
-        shuffleCards(); // getting new cards; cannot click
+        continueGame();
     }
     
     resetQuit.onclick = function() {
-        quitGame(); //
+        resetGame();
     }
-    // DESIGN
 }
 
 function cardClickHandler(event) {
@@ -128,15 +124,24 @@ function displayStats() {
     $('#pct-accurate').text(calculateAccuracy() + "%");
 }
 
-function quitGame() {
+function resetGame() {
     cardClickOne = null;
     cardClickTwo = null;
     uMatched = 0;
-    maxMatched = 2;     // 8
+    maxMatched = 8;
     uAttempts = 0;
     uGamesPlayed = 0;
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
     displayStats();
+}
+
+function continueGame() {
+    cardClickOne = null;
+    cardClickTwo = null;
+    maxMatched += 2;
+    $('.modal').hide();
+    $(".modal-content").remove();
+    initializeApp();
 }
