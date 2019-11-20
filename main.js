@@ -19,11 +19,11 @@ var numDowns = 1;
 // var cardArray = ['a','b','c','d','e','f','g','h','i',
 //                     'a','b','c','d','e','f','g','h','i']; // Q2 a-i (18)
 
-var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l',
-                    'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
+// var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l',
+//                     'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
 
-// var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
-//                     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
+var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
+                    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
 
 
 var canClickMouse = true;
