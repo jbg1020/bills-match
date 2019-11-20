@@ -3,7 +3,7 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 2;                     // when uMatched = this, game won
+var maxMatched = 6;                     // when uMatched = this, game won // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
 var numDowns = 1;
@@ -11,15 +11,19 @@ var numDowns = 1;
 //     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
 //     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
 // ];
-var cardArray = ['a','b','a', 'b']; // small size for testing
 
-var cardArrayQ1 = ['a','b','c','d','e','f','a','b','c','d','e','f']; // Q1 a-f (12)
-var cardArrayQ2 = ['a','b','c','d','e','f','g','h','i',
-                    'a','b','c','d','e','f','g','h','i']; // Q2 a-i (18)
-var cardArrayQ3 = ['a','b','c','d','e','f','g','h','i','j','k','l',
-                    'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
-var cardArrayQ4 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
-                    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
+// var cardArray = ['a','b','a', 'b']; // small size for testing
+
+var cardArray = ['a','b','c','d','e','f','a','b','c','d','e','f']; // Q1 a-f (12)
+
+// var cardArrayQ2 = ['a','b','c','d','e','f','g','h','i',
+//                     'a','b','c','d','e','f','g','h','i']; // Q2 a-i (18)
+
+// var cardArrayQ3 = ['a','b','c','d','e','f','g','h','i','j','k','l',
+//                     'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
+
+// var cardArrayQ4 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
+//                     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
 
 
 var canClickMouse = true;
@@ -178,7 +182,7 @@ function resetGame() {
     cardClickOne = null;
     cardClickTwo = null;
     uMatched = 0;
-    maxMatched = 2 // 8;
+    maxMatched = 6; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
     uAttempts = 0;
     uGamesPlayed = 0;
     numDowns = 1;
@@ -191,7 +195,7 @@ function resetGame() {
 function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
-    maxMatched += 2; // 8
+    maxMatched += 6; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
