@@ -12,6 +12,16 @@ var numDowns = 1;
 //     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
 // ];
 var cardArray = ['a','b','a', 'b']; // small size for testing
+
+var cardArrayQ1 = ['a','b','c','d','e','f','a','b','c','d','e','f']; // Q1 a-f (12)
+var cardArrayQ2 = ['a','b','c','d','e','f','g','h','i',
+                    'a','b','c','d','e','f','g','h','i']; // Q2 a-i (18)
+var cardArrayQ3 = ['a','b','c','d','e','f','g','h','i','j','k','l',
+                    'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
+var cardArrayQ4 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
+                    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
+
+
 var canClickMouse = true;
 
 function initializeApp() {
