@@ -39,6 +39,12 @@ aside {
     /* border: 1px solid blue; */
 }
 
+#down {
+    /* border: 2px dashed red; */
+    color: darkorange;
+}
+
+
 main {
     display: inline-block;
     /* border: 1px solid hotpink; */
@@ -134,38 +140,48 @@ main {
 
 /* The Modal (background) */
 .modal {
+    background-color: black;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    left: auto;
+    top: 5vh;
+    width: 65%; /* Full width */
+    height: auto; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
   }
   
   /* Modal Content/Box */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
+ .modal-content {
+     height: 100%;
+    margin: 3% auto; /* 15% from the top and centered */
     width: 80%; /* Could be more or less, depending on screen size */
   }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
+img {
+    float:right;
+}
+ .lost-modal {
+    color: red;
+    font-size: 380%;
+    text-align: center;
+    width: 45%;
+}
+
+.replay {
+    border: 1px solid green;
     cursor: pointer;
-  }
+}
+.replay:hover {
+    background-color: green;
+    color: white;
+}
+
+.quit {
+    border: 1px solid red;
+    cursor: pointer;
+}
+.quit:hover {
+    background-color: red;
+    color: white;
+}
