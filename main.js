@@ -40,7 +40,7 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
 }
 
 function winModal() {
-    var wooHoo = `<div class="modal-content">
+    var wooHoo = `<div class="modal-content win-modal">
                     <h2>YOU WON</h2>
                     <div class = "replay">PLAY AGAIN?</div>
                     <div class="quit">QUIT</div>
@@ -60,13 +60,18 @@ function winModal() {
 }
 
 function loseModal() {
-    var wompWomp = `<div class="modal-content lost-modal">
-                    <h2>You Lost :(</h2>
-                    <div class = "replay">PLAY AGAIN?</div>
-                    <div class="quit">QUIT</div>
+    var wompWomp = `<div class="modal-content">
+                    <img src="./images/you-lose.gif"/>
+                    <div class="lost-modal">
+                        <h2>You Lost :(</h2>
+                        <div class = "replay">PLAY AGAIN?</div>
+                        <div class="quit">QUIT</div>
+                    </div>
                 </div>`;
                 $(wompWomp).appendTo(".modal");
                 $('.modal').show();
+
+                //lay out divs similart for winmodal
 
     var playAgain = $('.replay')[0];
     var resetQuit = $('.quit')[0];
