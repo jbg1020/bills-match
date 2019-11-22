@@ -202,7 +202,7 @@ function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
     maxMatched += 2; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
-    // whichQuarter < 4 ? whichQuarter++ : whichQuarter = 1;  // pickup here for conditional on continue button to keep certain stats
+    // whichQuarter < 4 ? whichQuarter++ : whichQuarter = 1;  // pickup here for conditional on continue button to keep certain stats --dont keep stats if they lose, only can reset; kep stats between games, reset properly
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
