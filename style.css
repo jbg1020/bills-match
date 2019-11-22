@@ -188,6 +188,13 @@ img {
     width: 45%;
 }
 
+.won-modal {
+    color: rgb(21, 255, 0);
+    font-size: 380%;
+    text-align: center;
+    width: 45%;
+}
+
 .replay {
     border: 1px solid green;
     cursor: pointer;

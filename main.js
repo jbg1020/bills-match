@@ -3,7 +3,7 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 9;                     // when uMatched = this, game won // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
+var maxMatched = 2;                     // when uMatched = this, game won // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
 var numDowns = 1;
@@ -12,7 +12,7 @@ var numDowns = 1;
 //     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
 // ];
 
-// var cardArray = ['a','b','a', 'b']; // small size for testing
+var cardArray = ['a','b','a', 'b']; // small size for testing
 
 // var cardArray = ['a','b','c','d','e','f','a','b','c','d','e','f']; // Q1 a-f (12)
 
@@ -22,10 +22,10 @@ var numDowns = 1;
 // var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l',
 //                     'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
 
-var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
-                    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
+// var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
+//                     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
 
-
+var whichModal = null;
 var canClickMouse = true;
 
 function initializeApp() {
@@ -53,51 +53,6 @@ function renderCardDivs() { // creates divs in random order from shuffleCards fu
     }
 }
 
-function winModal() {
-    var wooHoo = `<div class="modal-content win-modal">
-                    <h2>YOU WON</h2>
-                    <div class = "replay">PLAY AGAIN?</div>
-                    <div class="quit">QUIT</div>
-                </div>`;
-                $(wooHoo).appendTo(".modal");
-                $('.modal').show();
-
-    var playAgain = $('.replay')[0];
-    var resetQuit = $('.quit')[0];
-
-    playAgain.onclick = function() {
-        continueGame();
-    }    
-    resetQuit.onclick = function() {
-        resetGame();
-    }
-}
-
-function loseModal() {
-    var wompWomp = `<div class="modal-content">
-                    <img src="./images/you-lose.gif"/>
-                    <div class="lost-modal">
-                        <h2>You Lost :(</h2>
-                        <div class = "replay">PLAY AGAIN?</div>
-                        <div class="quit">QUIT</div>
-                    </div>
-                </div>`;
-                $(wompWomp).appendTo(".modal");
-                $('.modal').show();
-
-                //lay out divs similart for winmodal
-
-    var playAgain = $('.replay')[0];
-    var resetQuit = $('.quit')[0];
-
-    playAgain.onclick = function() {
-        resetGame();
-    }    
-    resetQuit.onclick = function() {
-        resetGame();
-    }
-}
-
 function cardClickHandler(event) {
     if ($(event.target).hasClass('front'))
         return;
@@ -121,13 +76,15 @@ function cardClickHandler(event) {
                 if (uMatched === maxMatched) {
                     uGamesPlayed++
                     console.log("You Won!");
-                    winModal();
+                    // winModal();
+                    testSingleModal('won-modal');
                 }
             } else {
                 canClickMouse = false;
                 numDowns++;
                 if (numDowns === 5) {
-                    loseModal();
+                    // loseModal();
+                    testSingleModal('lost-modal');
                     // show lose modal
                 }
                 // console.log('card2::', cardClickTwo.css('background-image'))
@@ -178,24 +135,52 @@ function displayStats() {
     $('#pct-accurate').text(calculateAccuracy() + "%");
 }
 
+
+function testSingleModal (whichModal) {
+    var zaModal = `<div class="modal-content">
+                    <img src="./images/${whichModal}.gif"/>
+                    <div class= ${whichModal}>
+                     <h2>TEst win/lost :(</h2>
+                     <div class = "replay">PLAY AGAIN?</div>
+                     <div class="quit">QUIT</div>
+                    </div>
+                   </div>`
+
+                   $(zaModal).appendTo(".modal");
+                   $('.modal').show();
+   
+    var playAgain = $('.replay')[0];  // **Remove index?
+    var resetQuit = $('.quit')[0];
+   
+    playAgain.onclick = function() {
+        continueGame();
+    }    
+    resetQuit.onclick = function() {
+        resetGame();
+    }
+}
+
+
+
+
 function resetGame() {
     cardClickOne = null;
     cardClickTwo = null;
     uMatched = 0;
-    maxMatched = 9; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
+    maxMatched = 2; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
     uAttempts = 0;
     uGamesPlayed = 0;
     numDowns = 1;
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
-    displayStats();
+    displayStats();  // **what happens when removing this and quit/reset game
 }
 
 function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
-    maxMatched += 9; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
+    maxMatched += 2; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
