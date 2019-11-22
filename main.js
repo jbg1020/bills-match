@@ -7,6 +7,7 @@ var maxMatched = 2;                     // when uMatched = this, game won // 2(t
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
 var numDowns = 1;
+var whichQuarter = 1;
 // var cardArray = [                       // these are the classes that correlate with the hidden images
 //     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
 //     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
@@ -75,16 +76,14 @@ function cardClickHandler(event) {
                 console.log('Matched! uMatched:', uMatched);
                 if (uMatched === maxMatched) {
                     uGamesPlayed++
-                    console.log("You Won!");
-                    // winModal();
-                    testSingleModal('won-modal');
+                    whichQuarter++;
+                    theModal('won-modal');
                 }
             } else {
                 canClickMouse = false;
                 numDowns++;
                 if (numDowns === 5) {
-                    // loseModal();
-                    testSingleModal('lost-modal');
+                    theModal('lost-modal');
                     // show lose modal
                 }
                 // console.log('card2::', cardClickTwo.css('background-image'))
@@ -130,28 +129,53 @@ function displayStats() {
             $('#down').text('fourth down');
             break;
     }
+
+    switch (whichQuarter) {
+        case 1:
+            $('#quarter').text('1st qtr');;
+            break;
+        case 2:
+            $('#quarter').text('2nd qtr');
+            break;
+        case 3:
+            $('#quarter').text('3rd qtr');
+            break;
+        case 4:
+            $('#quarter').text('4th qtr');
+            break;
+    }
+    
     $('#num-games-played').text(uGamesPlayed);
     $('#num-attempts').text(uAttempts);
     $('#pct-accurate').text(calculateAccuracy() + "%");
 }
 
 
-function testSingleModal (whichModal) {
-    var zaModal = `<div class="modal-content">
+function theModal(whichModal) {
+    var winLose = `<div class="modal-content">
                     <img src="./images/${whichModal}.gif"/>
                     <div class= ${whichModal}>
-                     <h2>TEst win/lost :(</h2>
-                     <div class = "replay">PLAY AGAIN?</div>
-                     <div class="quit">QUIT</div>
+                     <h2>${whichModal==="lost-modal" ? "YOU LOST" : "YOU WON!!!"}</h2>
+                     <div class = "replay">Replay (keep stats)</div>
+                     <div class="quit">Quit</div>
                     </div>
                    </div>`
 
-                   $(zaModal).appendTo(".modal");
-                   $('.modal').show();
-   
+    var quarterModal = `<div class="modal-content">
+                            <div class="quarter-modal">
+                                <h2>GET READY FOR THE 2/3/4th quarter</h2>
+                                <div class = "replay">Continue!!?</div>
+                                <div class="quit">Start Over</div>
+                            </div>
+                    </div>`
+
+
+    whichQuarter < 5 && numDowns < 5? $(quarterModal).appendTo(".modal") : $(winLose).appendTo(".modal");  // doublecheck this 
+    $('.modal').show();
+
     var playAgain = $('.replay')[0];  // **Remove index?
     var resetQuit = $('.quit')[0];
-   
+
     playAgain.onclick = function() {
         continueGame();
     }    
@@ -159,9 +183,6 @@ function testSingleModal (whichModal) {
         resetGame();
     }
 }
-
-
-
 
 function resetGame() {
     cardClickOne = null;
@@ -181,6 +202,7 @@ function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
     maxMatched += 2; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
+    // whichQuarter < 4 ? whichQuarter++ : whichQuarter = 1;  // pickup here for conditional on continue button to keep certain stats
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
