@@ -3,17 +3,15 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 2;                     // when uMatched = this, game won // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
+var maxMatched = 14;                    // total matches for all 4 quarters                     
+var quarterMatched = 2;                 // when uMatched = this,next quarter // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
 var uAttempts = 0;                      // increments after every 2nd click
 var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
 var numDowns = 1;
 var whichQuarter = 1;
-// var cardArray = [                       // these are the classes that correlate with the hidden images
-//     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-//     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
-// ];
 
-var cardArray = ['a','b','a', 'b']; // small size for testing
+
+var cardArray = ['a', 'b', 'a', 'b']; // small size for testing
 
 // var cardArray = ['a','b','c','d','e','f','a','b','c','d','e','f']; // Q1 a-f (12)
 
@@ -46,7 +44,7 @@ function shuffleCards() {  // shuffles cardArray order
 }
 
 function renderCardDivs() { // creates divs in random order from shuffleCards function
-    $( ".card-wrapper" ).remove();
+    $(".card-wrapper").remove();
     for (var arrIndex = 0; arrIndex < cardArray.length; arrIndex++) {
         var cardDiv = `<div class="card-wrapper"><div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div></div>`;
         $(cardDiv).appendTo(".card-container");
@@ -74,10 +72,13 @@ function cardClickHandler(event) {
                 cardClickOne = null;
                 cardClickTwo = null;
                 console.log('Matched! uMatched:', uMatched);
-                if (uMatched === maxMatched) {
+                if (uMatched === maxMatched && quarterMatched === maxMatched) {
                     uGamesPlayed++
-                    whichQuarter++;
                     theModal('won-modal');
+                }
+                else if (uMatched === quarterMatched) {
+                    whichQuarter++
+                    theModal('quarter-modal');
                 }
             } else {
                 canClickMouse = false;
@@ -144,7 +145,7 @@ function displayStats() {
             $('#quarter').text('4th qtr');
             break;
     }
-    
+
     $('#num-games-played').text(uGamesPlayed);
     $('#num-attempts').text(uAttempts);
     $('#pct-accurate').text(calculateAccuracy() + "%");
@@ -155,42 +156,48 @@ function theModal(whichModal) {
     var winLose = `<div class="modal-content">
                     <img src="./images/${whichModal}.gif"/>
                     <div class= ${whichModal}>
-                     <h2>${whichModal==="lost-modal" ? "YOU LOST" : "YOU WON!!!"}</h2>
-                     <div class = "replay">Replay (keep stats)</div>
+                     <h2>${whichModal === "lost-modal" ? "YOU LOST" : "YOU WON!!!"}</h2>
+                     <div class = "replay">Replay (keep current stats)</div>
                      <div class="quit">Quit</div>
                     </div>
                    </div>`
 
     var quarterModal = `<div class="modal-content">
-                            <div class="quarter-modal">
+                            <div class=${whichModal}>
                                 <h2>GET READY FOR THE 2/3/4th quarter</h2>
-                                <div class = "replay">Continue!!?</div>
+                                <div class = "continue">Continue!!?</div>
                                 <div class="quit">Start Over</div>
                             </div>
                     </div>`
 
 
-    whichQuarter < 5 && numDowns < 5? $(quarterModal).appendTo(".modal") : $(winLose).appendTo(".modal");  // doublecheck this 
+    whichQuarter < 5 && numDowns < 5 ? $(quarterModal).appendTo(".modal") : $(winLose).appendTo(".modal");  // doublecheck this 
     $('.modal').show();
 
     var playAgain = $('.replay')[0];  // **Remove index?
     var resetQuit = $('.quit')[0];
+    var replayContinue = $('.continue')[0];
 
-    playAgain.onclick = function() {
-        continueGame();
-    }    
-    resetQuit.onclick = function() {
-        resetGame();
-    }
+        resetQuit.onclick = function () {
+            resetGame();
+        }
+        replayContinue.onclick = function () {
+            continueGame();  // ********************** on clicking Continue, it doubles accuracy and increases quarter 1 too many. debug here
+        }
+
+        playAgain.onclick = function () { // still getting cannot set property onclick here
+            replayWithStats();
+        }
 }
 
 function resetGame() {
     cardClickOne = null;
     cardClickTwo = null;
     uMatched = 0;
-    maxMatched = 2; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
+    quarterMatched = 2; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
     uAttempts = 0;
     uGamesPlayed = 0;
+    whichQuarter = 1
     numDowns = 1;
     $('.modal').hide();
     $(".modal-content").remove();
@@ -198,11 +205,23 @@ function resetGame() {
     displayStats();  // **what happens when removing this and quit/reset game
 }
 
+function replayWithStats() {
+    cardClickOne = null;
+    cardClickTwo = null;
+    quarterMatched = 2; //2(test), 6, 9, etc
+    whichQuarter = 1;
+    numDowns = 1
+    $('.modal').hide();
+    $(".modal-content").remove();
+    initializeApp();
+}
+
 function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
-    maxMatched += 2; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
-    // whichQuarter < 4 ? whichQuarter++ : whichQuarter = 1;  // pickup here for conditional on continue button to keep certain stats --dont keep stats if they lose, only can reset; kep stats between games, reset properly
+    quarterMatched += 1; // 2(test), 6(Q1), 9(Q2), 12(Q3), 15(Q4)
+    // numDowns = 1;
+    whichQuarter++;
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
