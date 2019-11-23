@@ -172,36 +172,47 @@ function theModal(whichModal) {
                             </div>
                     </div>`
 
+//-------------------------------------------------------------------------------------------------------------------------
+    var testHTML = 
+            `<div class="modal-content">
+                <img src="./images/${whichModal}.gif"/> 
+                <div class= ${whichModal}> (234QUARTER/WON/LOST-MODAL) 5 possibilities of modals/images/text
+                    <h2>${varA}</h2>
+                    <div class = "continue">Continue?</div>
+                    <div class = "start-over">Replay (keep current stats)</div>
+                    <div class = "reset-quit">Quit</div>
+                </div>
+            </div>`
+
+//---------------------------------------------------------------------------------------------------------------------
+
     whichModal === 'quarter-modal' ? $(quarterModal).appendTo(".modal") : $(winLose).appendTo(".modal");
     $('.modal').show();
 
-    // var replayLost = $('.replay-lost')[0];  // **Remove index?
-    // var resetQuit = $('.reset-quit')[0];
-    // var nextQuarter = $('.continue');
+    var replayLost = $('.replay-lost')[0]; // REPLAY  // **Remove index?
+    var resetQuit = $('.reset-quit')[0];  // QUIT
+    var nextQuarter = $('.continue')[0];  // CONTINUE
 
 
-    $('.replay-lost')[0].onclick = function () { // still getting cannot set property onclick here
+    // $('.replay-lost')[0].onclick = function () { // still getting cannot set property onclick here
+    //     replayWithStats();
+    // }
+    // $('.reset-quit')[0].onclick = function () {
+    //     resetGame();
+    // }
+    // $('.continue')[0].onclick = function () { 
+    //     continueGame();
+    // }
+
+    replayLost.onclick = function () { // still getting cannot set property onclick here
         replayWithStats();
     }
-    $('.reset-quit')[0].onclick = function () {
+    resetQuit.onclick = function () {
         resetGame();
     }
-    $('.continue')[0].onclick = function () { 
+    nextQuarter.onclick = function () {
         continueGame();
     }
-
-
-
-
-    // replayLost.onclick = function () { // still getting cannot set property onclick here
-        //     replayWithStats();
-        // }
-        // resetQuit.onclick = function () {
-        //     resetGame();
-        // }
-        // nextQuarter.onclick = function () { 
-        //     continueGame();
-        // }
 }
 
 function resetGame() { // clicking cards not working after loss
