@@ -202,20 +202,20 @@ img {
     width: 45%;
 }
 
-.replay {
+.replay-lost {
     border: 1px solid green;
     cursor: pointer;
 }
-.replay:hover {
+.replay-lost:hover {
     background-color: green;
     color: white;
 }
 
-.quit {
+.reset-quit {
     border: 1px solid red;
     cursor: pointer;
 }
-.quit:hover {
+.reset-quit:hover {
     background-color: red;
     color: white;
 }
