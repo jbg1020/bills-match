@@ -9,9 +9,10 @@ var numDowns = 1;
 var whichQuarter = 1;
 
 
-var cardArray = ['a','b','a','b']; // small size for testing
+var cardArray = null;
+var cardArray1 = ['a','b','a','b'];
 var cardArray2 = ['a','b','c','a','b','c'];
-var cardArray3 = ['a','b','c','d','a','b','c','d']; // Q1 a-f (12)
+var cardArray3 = ['a','b','c','d','a','b','c','d'];
 var cardArray4 = ['a','b','c','d','e','a','b','c','d','e'];
 
 // var cardArray3 = ['a','b','c','d','e','f','g','h','i',
@@ -33,7 +34,20 @@ function initializeApp() {
 
 function shuffleCards() {  // shuffles cardArray order
 
-    // if whichQuarter = 2, 3, 4, cardArray=cardArray2, cardArray3, cardArray4 .... 
+    switch (whichQuarter) {
+        case 1:
+            cardArray=cardArray1;
+            break;
+        case 2:
+            cardArray=cardArray2;
+            break;
+        case 3:
+            cardArray=cardArray3;
+            break;
+        case 4:
+            cardArray=cardArray4;
+            break;
+    }
 
     for (var i = cardArray.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -138,7 +152,7 @@ function displayStats() {
 
     switch (whichQuarter) {
         case 1:
-            $('#quarter').text('1st qtr');;
+            $('#quarter').text('1st qtr');
             break;
         case 2:
             $('#quarter').text('2nd qtr');
@@ -217,7 +231,7 @@ function resetGame() {
     displayStats();  // **what happens when removing this and quit/reset game
 }
 
-function replayWithStats() {  // clicking cards not working after loss
+function replayWithStats() {
     cardClickOne = null;
     cardClickTwo = null;
     whichQuarter = 1;
