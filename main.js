@@ -5,19 +5,19 @@ var cardClickTwo = null;                // hides back of card and shows front cl
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
 var maxMatched = 14;                    // total matches for all 4 quarters                     
 var uAttempts = 0;                      // increments after every 2nd click
-var uGamesPlayed = 0;                   // increment +1 when uMatched = maxMatched
 var numDowns = 1;
 var whichQuarter = 1;
 
 
-var cardArray = ['a', 'b', 'a', 'b']; // small size for testing
+var cardArray = ['a','b','a','b']; // small size for testing
+var cardArray2 = ['a','b','c','a','b','c'];
+var cardArray3 = ['a','b','c','d','a','b','c','d']; // Q1 a-f (12)
+var cardArray4 = ['a','b','c','d','e','a','b','c','d','e'];
 
-// var cardArray = ['a','b','c','d','e','f','a','b','c','d','e','f']; // Q1 a-f (12)
-
-// var cardArray = ['a','b','c','d','e','f','g','h','i',
+// var cardArray3 = ['a','b','c','d','e','f','g','h','i',
 //                     'a','b','c','d','e','f','g','h','i']; // Q2 a-i (18)
 
-// var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l',
+// var cardArray4 = ['a','b','c','d','e','f','g','h','i','j','k','l',
 //                     'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
 
 // var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
@@ -32,6 +32,9 @@ function initializeApp() {
 }
 
 function shuffleCards() {  // shuffles cardArray order
+
+    // if whichQuarter = 2, 3, 4, cardArray=cardArray2, cardArray3, cardArray4 .... 
+
     for (var i = cardArray.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = cardArray[i];
@@ -79,14 +82,14 @@ function cardClickHandler(event) {
                         theModal('quarter-modal');
                         break;
                     case maxMatched:
-                        uGamesPlayed++
                         theModal('won-modal');
+                        break;
                 }
                 
             } else {
                 canClickMouse = false;
                 numDowns++;
-                if (numDowns === 5) {
+                if (numDowns > 4) {
                     theModal('lost-modal');
                 }
                 // console.log('card2::', cardClickTwo.css('background-image'))
@@ -148,79 +151,64 @@ function displayStats() {
             break;
     }
 
-    $('#num-games-played').text(uGamesPlayed);
     $('#num-attempts').text(uAttempts);
     $('#pct-accurate').text(calculateAccuracy() + "%");
 }
 
 
 function theModal(whichModal) {
-    var winLose = `<div class="modal-content">
-                    <img src="./images/${whichModal}.gif"/>
+    var greeting = null;
+
+    switch(whichModal){
+    case 'lost-modal':
+        greeting = 'You Lost :(';
+        break;
+    case 'won-modal':
+        greeting = 'You Won!!!';
+        break;
+    case 'quarter-modal':
+        greeting = 'Ready for next quarter?';
+        break;
+    }
+
+    var htmlModal = `<div class="modal-content">
+                    <img src="./images/${whichModal}.gif"/> 
                     <div class= ${whichModal}>
-                     <h2>${whichModal === "lost-modal" ? "YOU LOST" : "YOU WON!!!"}</h2>
-                     <div class="replay-lost">Replay (keep current stats)</div>
-                     <div class="reset-quit">Quit</div>
+                        <h2>${greeting}</h2>
+                        <div class = "continue">Continue?</div>
+                        <div class = "start-over">Start Over</div>
+                        <div class = "quit">Quit</div>
                     </div>
-                   </div>`
+                </div>`
 
-    var quarterModal = `<div class="modal-content">
-                            <div class=${whichModal}>
-                                <h2>GET READY FOR THE 2/3/4th quarter</h2>
-                                <div class = "continue">Continue!!?</div>
-                                <div class="reset-quit">Start Over</div>
-                            </div>
-                    </div>`
-
-//-------------------------------------------------------------------------------------------------------------------------
-    var testHTML = 
-            `<div class="modal-content">
-                <img src="./images/${whichModal}.gif"/> 
-                <div class= ${whichModal}> (234QUARTER/WON/LOST-MODAL) 5 possibilities of modals/images/text
-                    <h2>${varA}</h2>
-                    <div class = "continue">Continue?</div>
-                    <div class = "start-over">Replay (keep current stats)</div>
-                    <div class = "reset-quit">Quit</div>
-                </div>
-            </div>`
-
-//---------------------------------------------------------------------------------------------------------------------
-
-    whichModal === 'quarter-modal' ? $(quarterModal).appendTo(".modal") : $(winLose).appendTo(".modal");
+    $(htmlModal).appendTo('.modal');
     $('.modal').show();
 
-    var replayLost = $('.replay-lost')[0]; // REPLAY  // **Remove index?
-    var resetQuit = $('.reset-quit')[0];  // QUIT
-    var nextQuarter = $('.continue')[0];  // CONTINUE
+    var aCont = $('.continue');
+    var bRedo = $('.start-over');
+    var cQuit = $('.quit');
 
+    $(aCont).on('click', function () {
+        whichQuarter > 4 ? replayWithStats() : continueGame();
+    });
 
-    // $('.replay-lost')[0].onclick = function () { // still getting cannot set property onclick here
-    //     replayWithStats();
-    // }
-    // $('.reset-quit')[0].onclick = function () {
-    //     resetGame();
-    // }
-    // $('.continue')[0].onclick = function () { 
-    //     continueGame();
-    // }
-
-    replayLost.onclick = function () { // still getting cannot set property onclick here
-        replayWithStats();
-    }
-    resetQuit.onclick = function () {
+    $(bRedo).on('click', function () {
         resetGame();
-    }
-    nextQuarter.onclick = function () {
-        continueGame();
-    }
+    });
+
+    $(cQuit).on('click', function () {
+        $('.modal').hide();
+        $(".modal-content").remove();
+    });
+
+
 }
 
-function resetGame() { // clicking cards not working after loss
+function resetGame() {
     cardClickOne = null;
     cardClickTwo = null;
     uMatched = 0;
     uAttempts = 0;
-    uGamesPlayed = 0;
     whichQuarter = 1
     numDowns = 1;
     $('.modal').hide();
@@ -234,7 +222,6 @@ function replayWithStats() {  // clicking cards not working after loss
     cardClickTwo = null;
     whichQuarter = 1;
     numDowns = 1
-    uGamesPlayed++;
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
