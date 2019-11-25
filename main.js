@@ -1,4 +1,5 @@
 $(document).ready(initializeApp);
+$(document).ready(welcomeModal);
 
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
@@ -208,7 +209,7 @@ function theModal(whichModal) {
                         <div class = "quit">Quit</div>
                     </div>
                 </div>`
-
+// maybe do above var like $('<.modal-content>').appendTo('.modal')
     $(htmlModal).appendTo('.modal');
     $('.modal').show();
 
@@ -265,4 +266,27 @@ function continueGame() {
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
+}
+
+function welcomeModal() {
+    var openModal = `<div class="modal-content">
+                        <div class= "welcome-modal">
+                            <h2>Welcome to the Bills Matching Game</h2>
+                            <div class = "instr-heading"> Instructions:
+                            <div class = "instructions">You begin on 1st Down and you have 4 chances to make a match.</div>
+                            <div class = "instructions">When you make a match, it becomes 1st down again.</div>
+                            <div class = "instructions">If you miss on 4th down, you may replay that quarter without losing your stats.</div>
+                            <div class = "instructions">Each quarter gets more difficult. Make it through 4 quarters to win!!</div>
+                            <button class = "play-button">Let's Play!</button>
+                        </div>
+                    </div>`
+
+    $(openModal).appendTo('.modal');
+    $('.modal').show();
+
+    $('.play-button').on('click', function () {
+        $('.modal').hide();
+        $(".modal-content").remove();
+    });
+
 }
