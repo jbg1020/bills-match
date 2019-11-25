@@ -69,6 +69,26 @@ main {
     left: 2%;
 }
 
+/* .q1 {
+    height: 32%;
+    width: 23%;
+}
+
+.q2 {
+    height: 32%;
+    width: 15.5%;
+}
+
+.q3 {
+    height: 24%;
+    width: 15.5%;
+}
+
+.q4 {
+    height: 19%;
+    width: 15.5%;
+} */
+
 .card {
     /* border: 1px solid red; */
     height: 100%;
@@ -168,11 +188,25 @@ img {
     width: 45%;
 }
 
-.replay {
+.won-modal {
+    color: rgb(21, 255, 0);
+    font-size: 380%;
+    text-align: center;
+    width: 45%;
+}
+
+.quarter-modal {
+    color: blue;
+    font-size: 380%;
+    text-align: center;
+    width: 45%;
+}
+
+.start-over {
     border: 1px solid green;
     cursor: pointer;
 }
-.replay:hover {
+.start-over:hover {
     background-color: green;
     color: white;
 }
@@ -183,5 +217,14 @@ img {
 }
 .quit:hover {
     background-color: red;
+    color: white;
+}
+
+.continue {
+    border: 1px solid blue;
+    cursor: pointer;
+}
+.continue:hover {
+    background-color: blue;
     color: white;
 }
