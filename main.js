@@ -3,17 +3,18 @@ $(document).ready(initializeApp);
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 14;                    // total matches for all 4 quarters                     
+var maxMatched = 14;                    // total matches for all 4 quarters
+var quarterMatched = 0;
 var uAttempts = 0;                      // increments after every 2nd click
 var numDowns = 1;
 var whichQuarter = 1;
 
 
 var cardArray = null;
-var cardArray1 = ['a','b','a','b'];
-var cardArray2 = ['a','b','c','a','b','c'];
-var cardArray3 = ['a','b','c','d','a','b','c','d'];
-var cardArray4 = ['a','b','c','d','e','a','b','c','d','e'];
+var cardArray1 = ['a', 'b', 'a', 'b'];
+var cardArray2 = ['a', 'b', 'c', 'a', 'b', 'c'];
+var cardArray3 = ['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd'];
+var cardArray4 = ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e'];
 
 // var cardArray3 = ['a','b','c','d','e','f','g','h','i',
 //                     'a','b','c','d','e','f','g','h','i']; // Q2 a-i (18)
@@ -36,16 +37,16 @@ function shuffleCards() {  // shuffles cardArray order
 
     switch (whichQuarter) {
         case 1:
-            cardArray=cardArray1;
+            cardArray = cardArray1;
             break;
         case 2:
-            cardArray=cardArray2;
+            cardArray = cardArray2;
             break;
         case 3:
-            cardArray=cardArray3;
+            cardArray = cardArray3;
             break;
         case 4:
-            cardArray=cardArray4;
+            cardArray = cardArray4;
             break;
     }
 
@@ -84,11 +85,12 @@ function cardClickHandler(event) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 uMatched++;
+                quarterMatched++;
                 numDowns = 1;
                 cardClickOne = null;
                 cardClickTwo = null;
                 console.log('Matched! uMatched:', uMatched);
-                switch (uMatched) {
+                switch (quarterMatched) {
                     case 2:
                     case 5:
                     case 9:
@@ -96,15 +98,30 @@ function cardClickHandler(event) {
                         theModal('quarter-modal');
                         break;
                     case maxMatched:
+                        whichQuarter++
                         theModal('won-modal');
                         break;
                 }
-                
+
             } else {
                 canClickMouse = false;
                 numDowns++;
                 if (numDowns > 4) {
                     theModal('lost-modal');
+                    switch (whichQuarter) {
+                        case 1:
+                            quarterMatched = 0;
+                            break;
+                        case 2:
+                            quarterMatched = 2;
+                            break;
+                        case 3:
+                            quarterMatched = 5;
+                            break;
+                        case 4:
+                            quarterMatched = 9;
+                            break;
+                    }
                 }
                 // console.log('card2::', cardClickTwo.css('background-image'))
                 setTimeout(flipBackMismatch, 1000);
@@ -173,16 +190,16 @@ function displayStats() {
 function theModal(whichModal) {
     var greeting = null;
 
-    switch(whichModal){
-    case 'lost-modal':
-        greeting = 'You Lost :(';
-        break;
-    case 'won-modal':
-        greeting = 'You Won!!!';
-        break;
-    case 'quarter-modal':
-        greeting = 'Ready for next quarter?';
-        break;
+    switch (whichModal) {
+        case 'lost-modal':
+            greeting = 'You Missed 4th Down! Try again :(';
+            break;
+        case 'won-modal':
+            greeting = 'You Won!!!';
+            break;
+        case 'quarter-modal':
+            greeting = 'Ready for next quarter?';
+            break;
     }
 
     var htmlModal = `<div class="modal-content">
@@ -222,6 +239,7 @@ function resetGame() {
     cardClickOne = null;
     cardClickTwo = null;
     uMatched = 0;
+    quarterMatched = 0;
     uAttempts = 0;
     whichQuarter = 1
     numDowns = 1;
@@ -239,9 +257,10 @@ function replayWithStats() {
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
+    displayStats();
 }
 
-function continueGame() {  
+function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
     numDowns = 1;
