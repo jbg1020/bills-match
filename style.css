@@ -3,6 +3,11 @@
     src: url('./fonts/scoreboard-font.ttf') format("truetype");
 }
 
+@font-face {
+    font-family: "Modal";
+    src: url('./fonts/modal-font.ttf') format("truetype");
+}
+
 body {
     background-image: url('./images/bg2.jpg');
     background-size: 16%;
@@ -169,6 +174,9 @@ main {
     width: 65%; /* Full width */
     height: auto; /* Full height */
     overflow: auto; /* Enable scroll if needed */
+    font-family: 'Modal', Arial, sans-serif;
+    background-image: url('./images/welcome-bg.jpg');
+    background-size: cover;
 
   }
   
@@ -177,13 +185,23 @@ main {
     height: 100%;
     margin: 3% auto; /* 15% from the top and centered */
     width: 80%; /* Could be more or less, depending on screen size */
+    /* background-image: url('./images/welcome-bg.jpg');
+    background-size: cover; */
   }
 
   .welcome-modal {
-    color: orange;
+    color: black;
     font-size: 200%;
     text-align: center;
     width: 45%;
+}
+
+.instr-heading {
+    color: white;
+}
+.instructions {
+    width: 157%;
+    background-color: rgb(200, 98, 98);
 }
 
 .play-button {
@@ -214,7 +232,7 @@ img {
 }
 
 .quarter-modal {
-    color: blue;
+    color: black;
     font-size: 380%;
     text-align: center;
     width: 45%;
