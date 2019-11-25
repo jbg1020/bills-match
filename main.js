@@ -1,27 +1,27 @@
 $(document).ready(initializeApp);
+$(document).ready(welcomeModal);
 
 var cardClickOne = null;                // hides back of card and shows front class
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-var maxMatched = 14;                    // total matches for all 4 quarters
+// var maxMatched = 14;    //********************************                // total matches for all 4 quarters
+var maxMatched = 36;
 var quarterMatched = 0;
 var uAttempts = 0;                      // increments after every 2nd click
 var numDowns = 1;
 var whichQuarter = 1;
 var cardArray = null;
-var cardArray1 = ['a', 'b', 'a', 'b'];
-var cardArray2 = ['a', 'b', 'c', 'a', 'b', 'c'];
-var cardArray3 = ['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd'];
-var cardArray4 = ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e'];
-
-// var cardArray3 = ['a','b','c','d','e','f','g','h','i',
-//                     'a','b','c','d','e','f','g','h','i']; // Q2 a-i (18)
-
-// var cardArray4 = ['a','b','c','d','e','f','g','h','i','j','k','l',
-//                     'a','b','c','d','e','f','g','h','i','j','k','l']; // Q3 a-l (24)
-
-// var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
-//                     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
+// var cardArray1 = ['a', 'b', 'a', 'b']; //***********************
+// var cardArray2 = ['a', 'b', 'c', 'a', 'b', 'c']; //********************
+// var cardArray3 = ['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd']; //****************
+// var cardArray4 = ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e']; //***************
+var cardArray1 = ['a', 'b', 'c', 'd', 'e', 'f', 'a', 'b', 'c', 'd', 'e', 'f'];
+var cardArray2 = ['a','b','c','d','e','f','g','h',
+                  'a','b','c','d','e','f','g','h'];
+var cardArray3 = ['a','b','c','d','e','f','g','h','i','j',
+                  'a','b','c','d','e','f','g','h','i','j'];
+var cardArray4 = ['a','b','c','d','e','f','g','h','i','j','k','l',
+                  'a','b','c','d','e','f','g','h','i','j','k','l'];
 
 var canClickMouse = true;
 
@@ -88,12 +88,18 @@ function cardClickHandler(event) {
                 cardClickTwo = null;
                 console.log('Matched! uMatched:', uMatched);
                 switch (quarterMatched) {
-                    case 2:
-                    case 5:
-                    case 9:
+                    // case 2: //****************
+                    // case 5: //**************
+                    // case 9: //****************
+                    //     whichQuarter++ //*************
+                    //     theModal('quarter-modal'); //***************
+                    //     break; //*****************
+                    case 6:
+                    case 14:
+                    case 24:
                         whichQuarter++
                         theModal('quarter-modal');
-                        break;
+                        break; // ***************** end
                     case maxMatched:
                         whichQuarter++
                         theModal('won-modal');
@@ -106,18 +112,30 @@ function cardClickHandler(event) {
                 if (numDowns > 4) {
                     theModal('lost-modal');
                     switch (whichQuarter) {
+                        // case 1:
+                        //     quarterMatched = 0;
+                        //     break;
+                        // case 2:
+                        //     quarterMatched = 2;
+                        //     break;
+                        // case 3:
+                        //     quarterMatched = 5;
+                        //     break;
+                        // case 4:
+                        //     quarterMatched = 9;
+                        //     break;
                         case 1:
                             quarterMatched = 0;
                             break;
                         case 2:
-                            quarterMatched = 2;
+                            quarterMatched = 6;
                             break;
                         case 3:
-                            quarterMatched = 5;
+                            quarterMatched = 14;
                             break;
                         case 4:
-                            quarterMatched = 9;
-                            break;
+                            quarterMatched = 24;
+                            break;  // ************* end
                     }
                 }
                 // console.log('card2::', cardClickTwo.css('background-image'))
@@ -208,7 +226,7 @@ function theModal(whichModal) {
                         <div class = "quit">Quit</div>
                     </div>
                 </div>`
-
+// maybe do above var like $('<.modal-content>').appendTo('.modal')
     $(htmlModal).appendTo('.modal');
     $('.modal').show();
 
@@ -265,4 +283,28 @@ function continueGame() {
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
+}
+
+function welcomeModal() {
+    var openModal = `<div class="modal-content">
+                        <img src="./images/helmet.png"/>
+                        <div class= "welcome-modal">
+                            <h2>Welcome to the Bills Matching Game</h2>
+                            <div class = "instr-heading"> Instructions:</div>
+                            <div class = "instructions">You begin on 1st Down and you have 4 chances to make a match.</div>
+                            <div class = "instructions">When you make a match, it becomes 1st down again.</div>
+                            <div class = "instructions">If you miss on 4th down, you may replay that quarter without losing your stats.</div>
+                            <div class = "instructions">Each quarter gets more difficult. Make it through 4 quarters to win!!</div>
+                            <button class = "play-button">Let's Play!</button>
+                        </div>
+                    </div>`
+
+    $(openModal).appendTo('.modal');
+    $('.modal').show();
+
+    $('.play-button').on('click', function () {
+        $('.modal').hide();
+        $(".modal-content").remove();
+    });
+
 }
