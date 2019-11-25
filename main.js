@@ -8,8 +8,6 @@ var quarterMatched = 0;
 var uAttempts = 0;                      // increments after every 2nd click
 var numDowns = 1;
 var whichQuarter = 1;
-
-
 var cardArray = null;
 var cardArray1 = ['a', 'b', 'a', 'b'];
 var cardArray2 = ['a', 'b', 'c', 'a', 'b', 'c'];
@@ -25,7 +23,6 @@ var cardArray4 = ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e'];
 // var cardArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o',
 //                     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o']; // Q4 a-o (30)
 
-var whichModal = null;
 var canClickMouse = true;
 
 function initializeApp() {
@@ -254,6 +251,7 @@ function replayWithStats() {
     cardClickTwo = null;
     whichQuarter = 1;
     numDowns = 1
+    quarterMatched = 0;
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
