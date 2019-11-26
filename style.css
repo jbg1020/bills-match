@@ -157,6 +157,18 @@ main {
     background-image: url('./images/9.PNG');
 }
 
+.j {
+    background-image: url('./images/10.PNG');
+}
+
+.k {
+    background-image: url('./images/11.PNG');
+}
+
+.l {
+    background-image: url('./images/12.PNG');
+}
+
 .hidden {
     display: none;
 }
