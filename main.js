@@ -299,13 +299,15 @@ function welcomeModal() {
     var openModal = `<div class="modal-content">
                         <img src="./images/helmet.png"/>
                         <div class= "welcome-modal">
-                            <h2>Welcome to the Bills Matching Game</h2>
+                            <h2>Welcome to the Buffalo Bills Matching Game</h2>
                             <div class = "instr-heading"> Instructions:</div>
-                            <div class = "instructions">You begin on 1st Down and you have 4 chances to make a match.</div>
-                            <div class = "instructions">When you make a match, it becomes 1st down again.</div>
-                            <div class = "instructions">If you miss on 4th down, you may replay that quarter without losing your stats.</div>
-                            <div class = "instructions">Each quarter gets more difficult. Make it through 4 quarters to win!!</div>
-                            <button class = "play-button">Let's Play!</button>
+                            <div class = "instruction-container">
+                                <li class = "instructions">Begin on 1st Down.</li>
+                                <li class = "instructions">Make a match for 1st Down.</li>
+                                <li class = "instructions">If you miss 4th down, you can replay the quarter.</li>
+                                <li class = "instructions">Make it through 4 quarters to win!!</li>
+                            </div>
+                            <div class = "play-button">Let's Play!</div>
                         </div>
                     </div>`
 

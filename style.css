@@ -175,8 +175,8 @@ main {
     z-index: 1; /* Sit on top */
     left: auto;
     top: 5vh;
-    width: 65%; /* Full width */
-    height: auto; /* Full height */
+    width: 73vw; /* Full width */
+    height: 90vh; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     font-family: 'Modal', Arial, sans-serif;
     background-image: url('./images/welcome-bg.jpg');
@@ -186,7 +186,7 @@ main {
   
   /* Modal Content/Box */
  .modal-content {
-    height: 100%;
+    /* height: 100%; */
     margin: 3% auto; /* 15% from the top and centered */
     width: 80%; /* Could be more or less, depending on screen size */
     /* background-image: url('./images/welcome-bg.jpg');
@@ -195,7 +195,7 @@ main {
 
   .welcome-modal {
     color: black;
-    font-size: 200%;
+    font-size: 3vh;
     text-align: center;
     width: 45%;
 }
@@ -203,9 +203,15 @@ main {
 .instr-heading {
     color: white;
 }
-.instructions {
-    width: 157%;
+.instruction-container {
+    width: 95vh;
     background-color: rgb(200, 98, 98);
+}
+
+.instructions {
+    text-align: left;
+    margin-left: 1%;
+    margin-top: 2%
 }
 
 .play-button {
@@ -213,13 +219,16 @@ main {
     cursor: pointer;
     font-size: 3vh;
     width: 53%;
+    margin-top: 6%;
+    margin-left: 63%;
 }
 .play-button:hover {
     background-color: darkgreen;
     color: white;
 }
 img {
-    float:right;
+    float: right;
+    height: 34vh;
 }
  .lost-modal {
     color: red;
