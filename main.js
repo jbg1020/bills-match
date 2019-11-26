@@ -5,7 +5,7 @@ var cardClickOne = null;                // hides back of card and shows front cl
 var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
 var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
 // var maxMatched = 14;    //********************************                // total matches for all 4 quarters
-var maxMatched = 36;
+var maxMatched = 33;
 var quarterMatched = 0;
 var uAttempts = 0;                      // increments after every 2nd click
 var numDowns = 1;
@@ -15,13 +15,13 @@ var cardArray = null;
 // var cardArray2 = ['a', 'b', 'c', 'a', 'b', 'c']; //********************
 // var cardArray3 = ['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd']; //****************
 // var cardArray4 = ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e']; //***************
-var cardArray1 = ['a', 'b', 'c', 'd', 'e', 'f', 'a', 'b', 'c', 'd', 'e', 'f'];
+var cardArray1 = ['a','b','c','d','e','f','a','b','c','d','e','f'];
 var cardArray2 = ['a','b','c','d','e','f','g','h',
                   'a','b','c','d','e','f','g','h'];
-var cardArray3 = ['a','b','c','d','e','f','g','h','i','j',
+var cardArray3 = ['a','b','c','d','e','f','g','h','i',
+                  'a','b','c','d','e','f','g','h','i'];
+var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
                   'a','b','c','d','e','f','g','h','i','j'];
-var cardArray4 = ['a','b','c','d','e','f','g','h','i','j','k','l',
-                  'a','b','c','d','e','f','g','h','i','j','k','l'];
 
 var canClickMouse = true;
 
@@ -59,7 +59,7 @@ function shuffleCards() {  // shuffles cardArray order
 function renderCardDivs() { // creates divs in random order from shuffleCards function
     $(".card-wrapper").remove();
     for (var arrIndex = 0; arrIndex < cardArray.length; arrIndex++) {
-        var cardDiv = `<div class="card-wrapper"><div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div></div>`;
+        var cardDiv = `<div class="card-wrapper q${whichQuarter}"><div class="card"><div class="back face"></div><div class="front face ${cardArray[arrIndex]}"></div></div></div>`;
         $(cardDiv).appendTo(".card-container");
         // console.log("single item?:", cardArray[arrIndex]);
     }
@@ -96,7 +96,7 @@ function cardClickHandler(event) {
                     //     break; //*****************
                     case 6:
                     case 14:
-                    case 24:
+                    case 23:
                         whichQuarter++
                         theModal('quarter-modal');
                         break; // ***************** end
@@ -134,7 +134,7 @@ function cardClickHandler(event) {
                             quarterMatched = 14;
                             break;
                         case 4:
-                            quarterMatched = 24;
+                            quarterMatched = 23;
                             break;  // ************* end
                     }
                 }

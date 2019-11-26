@@ -74,25 +74,25 @@ main {
     left: 2%;
 }
 
-/* .q1 {
+.q1 {
     height: 32%;
     width: 23%;
 }
 
 .q2 {
-    height: 32%;
-    width: 15.5%;
+    height: 27%;
+    width: 21%;
 }
 
 .q3 {
-    height: 24%;
-    width: 15.5%;
+    height: 32%;
+    width: 15%;
 }
 
 .q4 {
-    height: 19%;
-    width: 15.5%;
-} */
+    height: 25%;
+    width: 18.5%;
+}
 
 .card {
     /* border: 1px solid red; */
@@ -159,14 +159,6 @@ main {
 
 .j {
     background-image: url('./images/10.PNG');
-}
-
-.k {
-    background-image: url('./images/11.PNG');
-}
-
-.l {
-    background-image: url('./images/12.PNG');
 }
 
 .hidden {
