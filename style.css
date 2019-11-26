@@ -8,17 +8,28 @@
     src: url('./fonts/modal-font.ttf') format("truetype");
 }
 
+@font-face {
+    font-family: "Bills Mafia";
+    src: url('./fonts/bills-mafia.ttf') format("truetype");
+}
+
 body {
     background-image: url('./images/bg2.jpg');
     background-size: 16%;
 }
 
 header {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 h1 {
-    border: 1px solid chartreuse;
+    /* border: 1px solid chartreuse; */
+    text-align: center;
+    font-family: 'Bills Mafia', Arial, sans-serif;
+    color: rgb(156, 0, 0);
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    font-size: 8vh;
+    margin: 0;
 }
 
 aside {
@@ -58,7 +69,7 @@ main {
 }
 
 .card-container {
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     width: 100%;
     height: 100%;
     display: flex;
@@ -109,6 +120,7 @@ main {
     height: 100%;
     width: 100%;
     position: absolute;
+    border-radius: 15px;
 } /* mess with the container /card relationship stuff*/
 
 .back {
@@ -175,96 +187,139 @@ main {
     z-index: 1; /* Sit on top */
     left: auto;
     top: 5vh;
-    width: 65%; /* Full width */
-    height: auto; /* Full height */
+    width: 73vw; /* Full width */
+    height: 90vh; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     font-family: 'Modal', Arial, sans-serif;
     background-image: url('./images/welcome-bg.jpg');
     background-size: cover;
+    border-radius: 30px;
 
   }
   
   /* Modal Content/Box */
  .modal-content {
-    height: 100%;
+    /* height: 100%; */
     margin: 3% auto; /* 15% from the top and centered */
     width: 80%; /* Could be more or less, depending on screen size */
+    font-size: 3vh;
     /* background-image: url('./images/welcome-bg.jpg');
     background-size: cover; */
   }
 
   .welcome-modal {
     color: black;
-    font-size: 200%;
+    /* font-size: 3vh; */
     text-align: center;
     width: 45%;
+}
+
+h2 {
+    width: 43vw;
+    font-size: 5vh;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .instr-heading {
     color: white;
 }
-.instructions {
-    width: 157%;
+.instruction-container {
+    width: 95vh;
     background-color: rgb(200, 98, 98);
+    border-radius: 15px;
+}
+
+.instructions {
+    text-align: left;
+    margin-left: 1%;
+    margin-top: 2%
 }
 
 .play-button {
     border: 1px solid red;
     cursor: pointer;
-    font-size: 3vh;
-    width: 53%;
+    font-size: 5vh;
+    width: 63vh;
+    height: 16vh;
+    margin-top: 12%;
+    margin-left: 30%;
+    background-color: rgb(9, 14, 85);
+    color: white;
+    font-family: 'Modal', Arial, sans-serif;
+    border-radius: 20px;
 }
 .play-button:hover {
     background-color: darkgreen;
     color: white;
 }
 img {
-    float:right;
+    float: right;
+    height: 34vh;
 }
  .lost-modal {
-    color: red;
-    font-size: 380%;
+    color: maroon;
+    /* font-size: 380%; */
     text-align: center;
     width: 45%;
 }
 
 .won-modal {
-    color: rgb(21, 255, 0);
-    font-size: 380%;
+    color: darkgreen;
+    /* font-size: 380%; */
     text-align: center;
     width: 45%;
 }
 
 .quarter-modal {
     color: black;
-    font-size: 380%;
+    /* font-size: 380%; */
     text-align: center;
     width: 45%;
 }
 
+.options-container{
+    /* border: 2px solid gold; */
+    height: 45vh;
+    width: 40vw;
+    margin-top: 15%;
+}
+
+.options-buttons {
+    width: 85%;
+    height: 25%;
+    margin: auto;
+    margin-top: 3%;
+    font-family: 'Modal', Arial, sans-serif;
+    font-size: 6vh;
+    border-radius: 20px;
+}
+
+.continue {
+    border: 1px solid darkgreen;
+    background-color: green;
+    cursor: pointer;
+}
+.continue:hover {
+    background-color: darkgreen;
+    color: white;
+}
+
 .start-over {
-    border: 1px solid green;
+    border: 1px solid rgb(9, 14, 85);
+    background-color: rgb(37, 50, 238);
     cursor: pointer;
 }
 .start-over:hover {
-    background-color: green;
+    background-color: rgb(9, 14, 85);;
     color: white;
 }
 
 .quit {
-    border: 1px solid red;
+    border: 1px solid maroon;
+    background-color: red;
     cursor: pointer;
 }
 .quit:hover {
-    background-color: red;
-    color: white;
-}
-
-.continue {
-    border: 1px solid blue;
-    cursor: pointer;
-}
-.continue:hover {
-    background-color: blue;
+    background-color: maroon;
     color: white;
 }

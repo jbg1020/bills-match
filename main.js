@@ -217,7 +217,7 @@ function theModal(whichModal) {
 
     switch (whichModal) {
         case 'lost-modal':
-            greeting = 'You Missed 4th Down! Try again :(';
+            greeting = 'You Missed 4th Down! Try again?';
             break;
         case 'won-modal':
             greeting = 'You Won!!!';
@@ -231,9 +231,11 @@ function theModal(whichModal) {
                     <img src="./images/${whichModal}.gif"/> 
                     <div class= ${whichModal}>
                         <h2>${greeting}</h2>
-                        <div class = "continue">Continue?</div>
-                        <div class = "start-over">Start Over</div>
-                        <div class = "quit">Quit</div>
+                        <div class = "options-container">
+                            <button class = "options-buttons continue">Continue?</button>
+                            <button class = "options-buttons start-over">Start Over</button>
+                            <button class = "options-buttons quit">Quit</button>
+                        </div>
                     </div>
                 </div>`
 // maybe do above var like $('<.modal-content>').appendTo('.modal')
@@ -255,6 +257,7 @@ function theModal(whichModal) {
     $(cQuit).on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
+        canClickMouse = false;
     });
 
 
@@ -299,12 +302,14 @@ function welcomeModal() {
     var openModal = `<div class="modal-content">
                         <img src="./images/helmet.png"/>
                         <div class= "welcome-modal">
-                            <h2>Welcome to the Bills Matching Game</h2>
+                            <h2 class = "welcome">Welcome to the Buffalo Bills Matching Game</h2>
                             <div class = "instr-heading"> Instructions:</div>
-                            <div class = "instructions">You begin on 1st Down and you have 4 chances to make a match.</div>
-                            <div class = "instructions">When you make a match, it becomes 1st down again.</div>
-                            <div class = "instructions">If you miss on 4th down, you may replay that quarter without losing your stats.</div>
-                            <div class = "instructions">Each quarter gets more difficult. Make it through 4 quarters to win!!</div>
+                            <div class = "instruction-container">
+                                <li class = "instructions">Begin on 1st Down.</li>
+                                <li class = "instructions">Make a match for 1st Down.</li>
+                                <li class = "instructions">If you miss 4th down, you can replay the quarter.</li>
+                                <li class = "instructions">Make it through 4 quarters to win!!</li>
+                            </div>
                             <button class = "play-button">Let's Play!</button>
                         </div>
                     </div>`
