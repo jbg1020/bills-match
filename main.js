@@ -201,6 +201,16 @@ function displayStats() {
     $('#pct-accurate').text(calculateAccuracy() + "%");
 }
 
+function addSuffix () {
+    switch (whichQuarter) {
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        case 4:
+            return 'th';
+    }
+}
 
 function theModal(whichModal) {
     var greeting = null;
@@ -213,7 +223,7 @@ function theModal(whichModal) {
             greeting = 'You Won!!!';
             break;
         case 'quarter-modal':
-            greeting = 'Ready for next quarter?';
+            greeting = `Ready for the ${whichQuarter+addSuffix()} quarter?`;
             break;
     }
 
@@ -306,5 +316,7 @@ function welcomeModal() {
         $('.modal').hide();
         $(".modal-content").remove();
     });
+
+
 
 }
