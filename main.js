@@ -320,7 +320,10 @@ function welcomeModal() {
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
-        new Audio("./sounds/test.ogg").play();
+        // new Audio("./sounds/test3.ogg").play();
+        var sounds = ['test','test2','test3']
+        var welcome = sounds[Math.floor(Math.random()*sounds.length)];
+        new Audio(`./sounds/${welcome}.mp3`).play();
     });
 
 }
