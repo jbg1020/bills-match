@@ -310,18 +310,17 @@ function welcomeModal() {
                                 <li class = "instructions">If you miss 4th down, you can replay the quarter.</li>
                                 <li class = "instructions">Make it through 4 quarters to win!!</li>
                             </div>
-                            <button class = "play-button">Let's Play!</button>
+                            <button id = "play-button">Let's Play!</button>
                         </div>
                     </div>`
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
 
-    $('.play-button').on('click', function () {
+    $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
+        new Audio("./sounds/test.ogg").play();
     });
-
-
 
 }
