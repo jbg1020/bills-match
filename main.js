@@ -75,6 +75,7 @@ function cardClickHandler(event) {
         $(this).find('.face:nth-child(1)').addClass("hidden");
         if (cardClickOne === null) {
             cardClickOne = $(this).find('.face:nth-child(2)');
+            playSounds('test3'); // ******************* SOUND TEST ********************
             // debugger;
             console.log('card1::', cardClickOne.css('background-image'))
         }
@@ -109,8 +110,10 @@ function cardClickHandler(event) {
             } else {
                 canClickMouse = false;
                 numDowns++;
+                playSounds('test3'); // ************************** SOUND TEST ************************************
                 if (numDowns > 4) {
                     theModal('lost-modal');
+                    // play 'losing' sound here
                     switch (whichQuarter) {
                         // case 1:
                         //     quarterMatched = 0;
@@ -320,10 +323,13 @@ function welcomeModal() {
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
-        // new Audio("./sounds/test3.ogg").play();
-        var sounds = ['test','test2','test3']
-        var welcome = sounds[Math.floor(Math.random()*sounds.length)];
-        new Audio(`./sounds/${welcome}.mp3`).play();
+        var letsPlay = ['test','test2','test3']; // make arrays 
+        var welcome = letsPlay[Math.floor(Math.random()*letsPlay.length)];
+        playSounds(welcome);
     });
 
+}
+
+function playSounds(soundFile) {
+    new Audio(`./sounds/${soundFile}.mp3`).play();
 }
