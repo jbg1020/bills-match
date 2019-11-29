@@ -75,13 +75,15 @@ function cardClickHandler(event) {
         $(this).find('.face:nth-child(1)').addClass("hidden");
         if (cardClickOne === null) {
             cardClickOne = $(this).find('.face:nth-child(2)');
-            playSounds('test3'); // ******************* SOUND TEST ********************
             // debugger;
             console.log('card1::', cardClickOne.css('background-image'))
         }
         else if (cardClickTwo === null) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
+                var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
+                var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
+                playSounds(gotFirstDown);
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
@@ -110,7 +112,6 @@ function cardClickHandler(event) {
             } else {
                 canClickMouse = false;
                 numDowns++;
-                playSounds('test3'); // ************************** SOUND TEST ************************************
                 if (numDowns > 4) {
                     theModal('lost-modal');
                     // play 'losing' sound here
