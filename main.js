@@ -81,6 +81,9 @@ function cardClickHandler(event) {
         else if (cardClickTwo === null) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
+                var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
+                var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
+                playSounds(gotFirstDown);
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
@@ -111,6 +114,7 @@ function cardClickHandler(event) {
                 numDowns++;
                 if (numDowns > 4) {
                     theModal('lost-modal');
+                    // play 'losing' sound here
                     switch (whichQuarter) {
                         // case 1:
                         //     quarterMatched = 0;
@@ -310,18 +314,23 @@ function welcomeModal() {
                                 <li class = "instructions">If you miss 4th down, you can replay the quarter.</li>
                                 <li class = "instructions">Make it through 4 quarters to win!!</li>
                             </div>
-                            <button class = "play-button">Let's Play!</button>
+                            <button id = "play-button">Let's Play!</button>
                         </div>
                     </div>`
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
 
-    $('.play-button').on('click', function () {
+    $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
+        var letsPlay = ['test','test2','test3']; // make arrays 
+        var welcome = letsPlay[Math.floor(Math.random()*letsPlay.length)];
+        playSounds(welcome);
     });
 
+}
 
-
+function playSounds(soundFile) {
+    new Audio(`./sounds/${soundFile}.mp3`).play();
 }

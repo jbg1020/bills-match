@@ -41,11 +41,12 @@ aside {
     height: 100%;
     text-align: center;
     vertical-align: top;
+    border-radius: 20px;
 }
 
 .stats {
     color: white;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     font-size: 8vh;/*2.5rem;*/
 }
 
@@ -235,7 +236,7 @@ h2 {
     margin-top: 2%
 }
 
-.play-button {
+#play-button {
     border: 1px solid red;
     cursor: pointer;
     font-size: 5vh;
@@ -248,7 +249,7 @@ h2 {
     font-family: 'Modal', Arial, sans-serif;
     border-radius: 20px;
 }
-.play-button:hover {
+#play-button:hover {
     background-color: darkgreen;
     color: white;
 }
