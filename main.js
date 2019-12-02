@@ -24,8 +24,8 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
                   'a','b','c','d','e','f','g','h','i','j'];
 
 var canClickMouse = true;
-var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
-var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
+var welcomeMusic = new Audio(`./sounds/welcome-modal.mp3`);
+var soundOn = true;
 
 function initializeApp() {
     shuffleCards();
@@ -83,11 +83,9 @@ function cardClickHandler(event) {
         else if (cardClickTwo === null) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
-                // if (numDowns === 4) {
-                //     playSounds(gotFirstDown);
-                // } else {
-                //     playSounds(gotFirstDown);
-                // }
+                var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
+                var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
+                playSounds(gotFirstDown);
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
@@ -117,7 +115,7 @@ function cardClickHandler(event) {
                 canClickMouse = false;
                 numDowns++;
                 if (numDowns === 4) {
-                    playSounds('4th-down');
+                    playSounds('fourth-down');
                 }
                 if (numDowns > 4) {
                     theModal('lost-modal');
@@ -327,17 +325,21 @@ function welcomeModal() {
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
-
+    welcomeMusic.play();
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
-        var letsPlay = ['test','test2','test3']; // make arrays 
-        var welcome = letsPlay[Math.floor(Math.random()*letsPlay.length)];
-        playSounds(welcome);
+        var letsPlaySounds = ['test','test2','test3']; 
+        var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
+        welcomeMusic.pause();
+        playSounds(clickLetsPlay);
     });
 
 }
 
 function playSounds(soundFile) {
+    if (soundOn === false) {
+        return;
+    }
     new Audio(`./sounds/${soundFile}.mp3`).play();
 }
