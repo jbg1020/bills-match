@@ -24,6 +24,8 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
                   'a','b','c','d','e','f','g','h','i','j'];
 
 var canClickMouse = true;
+var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
+var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
 
 function initializeApp() {
     shuffleCards();
@@ -81,9 +83,11 @@ function cardClickHandler(event) {
         else if (cardClickTwo === null) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
-                var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
-                var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
-                playSounds(gotFirstDown);
+                // if (numDowns === 4) {
+                //     playSounds(gotFirstDown);
+                // } else {
+                //     playSounds(gotFirstDown);
+                // }
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
@@ -112,6 +116,9 @@ function cardClickHandler(event) {
             } else {
                 canClickMouse = false;
                 numDowns++;
+                if (numDowns === 4) {
+                    playSounds('4th-down');
+                }
                 if (numDowns > 4) {
                     theModal('lost-modal');
                     // play 'losing' sound here
