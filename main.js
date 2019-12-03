@@ -83,8 +83,7 @@ function cardClickHandler(event) {
         else if (cardClickTwo === null) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
-                var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
-                var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
+                var gotFirstDown = `first-down${Math.floor(Math.random() * 7) + 1}`;
                 if (numDowns < 4) {
                     playSounds(gotFirstDown);
                 } else {
