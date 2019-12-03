@@ -84,11 +84,18 @@ function cardClickHandler(event) {
             cardClickTwo = $(this).find('.face:nth-child(2)');
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 var gotFirstDown = `first-down${Math.floor(Math.random() * 7) + 1}`;
-                if (numDowns < 4) {
+                if (quarterMatched===5 || quarterMatched===13 || quarterMatched===22) {
+                    playSounds('test'); // ********** END OF QUARTER SOUND HERE
+                } else if (numDowns < 4) {
                     playSounds(gotFirstDown);
                 } else {
-                    playSounds('made-on-4th1');
+                    playSounds('made-on-4th1')
                 }
+                // if (numDowns < 4) {
+                //     playSounds(gotFirstDown);
+                // } else {
+                //     playSounds('made-on-4th1');
+                // }
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
