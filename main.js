@@ -85,7 +85,11 @@ function cardClickHandler(event) {
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 var firstDownSounds = ['first-down1', 'first-down2', 'first-down3'];
                 var gotFirstDown = firstDownSounds[Math.floor(Math.random() * firstDownSounds.length)];
-                playSounds(gotFirstDown);
+                if (numDowns < 4) {
+                    playSounds(gotFirstDown);
+                } else {
+                    playSounds('made-on-4th1');
+                }
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
