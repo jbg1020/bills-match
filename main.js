@@ -25,7 +25,8 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
 
 var canClickMouse = true;
 var welcomeMusic = new Audio(`./sounds/welcome-modal.mp3`);
-var soundOn = true;
+var soundOn = null;
+var musicOn = null;
 
 function initializeApp() {
     shuffleCards();
@@ -237,6 +238,7 @@ function theModal(whichModal) {
     switch (whichModal) {
         case 'lost-modal':
             greeting = 'You Missed 4th Down! Try again?';
+            playSounds('missed-4th');
             break;
         case 'won-modal':
             greeting = 'You Won!!!';
@@ -352,4 +354,14 @@ function playSounds(soundFile) {
         return;
     }
     new Audio(`./sounds/${soundFile}.mp3`).play();
+}
+
+function playMusic(gameMusicQuarter) {
+    var gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`).play();  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
+
+    if (musicOn === false) {
+        return;
+    }
+    gamePlayMusic.loop = true;
+    gamePlayMusic.play();
 }
