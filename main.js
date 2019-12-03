@@ -329,7 +329,7 @@ function welcomeModal() {
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
-        var letsPlaySounds = ['test','test2','test3']; 
+        var letsPlaySounds = ['lets-play1','lets-play2']; 
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
         welcomeMusic.pause();
         playSounds(clickLetsPlay);
