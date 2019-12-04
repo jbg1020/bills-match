@@ -1,20 +1,16 @@
 $(document).ready(initializeApp);
 $(document).ready(welcomeModal);
 
-var cardClickOne = null;                // hides back of card and shows front class
-var cardClickTwo = null;                // hides back of card and shows front class /cant be same child as cardClickOne
-var uMatched = 0;                       // when cardClickOne and cardClickTwo classnames match, this +1
-// var maxMatched = 14;    //********************************                // total matches for all 4 quarters
+var cardClickOne = null;
+var cardClickTwo = null;
+var uMatched = 0;
 var maxMatched = 33;
 var quarterMatched = 0;
-var uAttempts = 0;                      // increments after every 2nd click
+var uAttempts = 0;
 var numDowns = 1;
 var whichQuarter = 1;
 var cardArray = null;
-// var cardArray1 = ['a', 'b', 'a', 'b']; //***********************
-// var cardArray2 = ['a', 'b', 'c', 'a', 'b', 'c']; //********************
-// var cardArray3 = ['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd']; //****************
-// var cardArray4 = ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e']; //***************
+
 var cardArray1 = ['a','b','c','d','e','f','a','b','c','d','e','f'];
 var cardArray2 = ['a','b','c','d','e','f','g','h',
                   'a','b','c','d','e','f','g','h'];
@@ -78,7 +74,6 @@ function cardClickHandler(event) {
         $(this).find('.face:nth-child(1)').addClass("hidden");
         if (cardClickOne === null) {
             cardClickOne = $(this).find('.face:nth-child(2)');
-            // debugger;
             console.log('card1::', cardClickOne.css('background-image'))
         }
         else if (cardClickTwo === null) {
@@ -104,18 +99,12 @@ function cardClickHandler(event) {
                 cardClickTwo = null;
                 console.log('Matched! uMatched:', uMatched);
                 switch (quarterMatched) {
-                    // case 2: //****************
-                    // case 5: //**************
-                    // case 9: //****************
-                    //     whichQuarter++ //*************
-                    //     theModal('quarter-modal'); //***************
-                    //     break; //*****************
                     case 6:
                     case 14:
                     case 23:
                         whichQuarter++
                         theModal('quarter-modal');
-                        break; // ***************** end
+                        break;
                     case maxMatched:
                         whichQuarter++
                         theModal('won-modal');
@@ -132,18 +121,6 @@ function cardClickHandler(event) {
                     theModal('lost-modal');
                     // play 'losing' sound here
                     switch (whichQuarter) {
-                        // case 1:
-                        //     quarterMatched = 0;
-                        //     break;
-                        // case 2:
-                        //     quarterMatched = 2;
-                        //     break;
-                        // case 3:
-                        //     quarterMatched = 5;
-                        //     break;
-                        // case 4:
-                        //     quarterMatched = 9;
-                        //     break;
                         case 1:
                             quarterMatched = 0;
                             break;
@@ -155,7 +132,7 @@ function cardClickHandler(event) {
                             break;
                         case 4:
                             quarterMatched = 23;
-                            break;  // ************* end
+                            break;
                     }
                 }
                 // console.log('card2::', cardClickTwo.css('background-image'))
@@ -280,8 +257,6 @@ function theModal(whichModal) {
         $(".modal-content").remove();
         canClickMouse = false;
     });
-
-
 }
 
 function resetGame() {
