@@ -337,7 +337,7 @@ function welcomeModal() {
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
-    welcomeMusic.play();
+    // welcomeMusic.play();
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
@@ -349,17 +349,36 @@ function welcomeModal() {
 
 }
 
+function soundModal() {
+    var doYouWantSound = `<div class="modal-content">
+                            <div class='sound-modal'>
+                                <h2>Choose your preferences:</h2>
+                                <div class = "options-container">
+                                    <div>Do you want sounds?</div>
+                                    <button class = "sound-button sfx">Continue?</button>
+                                    <button class = "sound-button music">Start Over</button>
+                                </div>
+                            </div>
+                          </div>`
+    $(doYouWantSound).appendTo('.modal');
+    $('.modal').show();
+
+    //click handler for $('.sfx') = if soundOn, soundOn=false, else soundOn=true; if musicOon, musicOn=false, else musicOn=true
+    //click handler for $('.music')
+
+}
+
 function playSounds(soundFile) {
-    if (soundOn === false) {
+    if (!soundOn) {
         return;
     }
     new Audio(`./sounds/${soundFile}.mp3`).play();
 }
 
 function playMusic(gameMusicQuarter) {
-    var gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`).play();  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
+    var gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
 
-    if (musicOn === false) {
+    if (!musicOn) {
         return;
     }
     gamePlayMusic.loop = true;
