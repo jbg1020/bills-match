@@ -278,8 +278,12 @@ img {
     width: 45%;
 }
 
-.sound-modal {
+/* .sound-modal {
     height: 50%;
+} */
+
+.sound-modal h2 {
+    text-align: center;
 }
 
 .options-container{

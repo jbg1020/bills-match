@@ -328,10 +328,14 @@ function soundModal() {
     var doYouWantSound = `<div class="modal-content">
                             <div class='sound-modal'>
                                 <h2>Choose your sound preferences:</h2>
+
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="soundSwitch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitches">
                                     <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
-                                </div>
+                                </div>    
+
+                                    <button id = "sounds-go">OK</button>
+
                             </div>
                           </div>`
     $(doYouWantSound).appendTo('.modal');
