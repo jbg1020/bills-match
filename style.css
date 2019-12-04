@@ -201,7 +201,7 @@ main {
   /* Modal Content/Box */
  .modal-content {
     /* height: 100%; */
-    margin: 3% auto; /* 15% from the top and centered */
+    margin: 3% auto; /* 3% from the top and centered */
     width: 80%; /* Could be more or less, depending on screen size */
     font-size: 3vh;
     /* background-image: url('./images/welcome-bg.jpg');
@@ -276,6 +276,10 @@ img {
     /* font-size: 380%; */
     text-align: center;
     width: 45%;
+}
+
+.sound-modal {
+    height: 50%;
 }
 
 .options-container{

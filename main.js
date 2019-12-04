@@ -1,5 +1,5 @@
 $(document).ready(initializeApp);
-$(document).ready(welcomeModal);
+$(document).ready(soundModal);
 
 var cardClickOne = null;
 var cardClickTwo = null;
@@ -312,7 +312,7 @@ function welcomeModal() {
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
-    // welcomeMusic.play();
+    welcomeMusic.play(); // *************************** START HERE, NEED TO THREAD WELCOME MUSIC INTO MUSIC FUNCTION AND SEE WHERE THIS MODAL FUNCTION IS CALLED BECAUSE THE SOUND MODAL WILL HAVE TO SHOW UP FIRST
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
@@ -327,11 +327,10 @@ function welcomeModal() {
 function soundModal() {
     var doYouWantSound = `<div class="modal-content">
                             <div class='sound-modal'>
-                                <h2>Choose your preferences:</h2>
-                                <div class = "options-container">
-                                    <div>Do you want sounds?</div>
-                                    <button class = "sound-button sfx">Continue?</button>
-                                    <button class = "sound-button music">Start Over</button>
+                                <h2>Choose your sound preferences:</h2>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="soundSwitch">
+                                    <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
                                 </div>
                             </div>
                           </div>`
@@ -340,6 +339,7 @@ function soundModal() {
 
     //click handler for $('.sfx') = if soundOn, soundOn=false, else soundOn=true; if musicOon, musicOn=false, else musicOn=true
     //click handler for $('.music')
+    //ok lets go button that executes welcome modal, --plays welcome music, sets soundOn and musicOn to TRUE
 
 }
 
@@ -353,9 +353,9 @@ function playSounds(soundFile) {
 function playMusic(gameMusicQuarter) {
     var gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
 
-    if (!musicOn) {
-        return;
-    }
-    gamePlayMusic.loop = true;
-    gamePlayMusic.play();
+    // if (!musicOn) {
+    //     return;
+    // }
+    // gamePlayMusic.loop = true;
+    // gamePlayMusic.play();
 }
