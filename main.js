@@ -22,6 +22,8 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
 var canClickMouse = true;
 var soundOn = null;
 var musicOn = null;
+// var whichQuarterString = whichQuarter.toString();
+// var gameSong = playMusic(whichQuarterString);
 
 function initializeApp() {
     shuffleCards();
@@ -80,6 +82,7 @@ function cardClickHandler(event) {
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 var gotFirstDown = `first-down${Math.floor(Math.random() * 7) + 1}`;
                 if (quarterMatched===5 || quarterMatched===13 || quarterMatched===22) {
+                    // gameSong.pause();
                     playSounds('test'); // ********** END OF QUARTER SOUND HERE
                 } else if (numDowns < 4) {
                     playSounds(gotFirstDown);
@@ -101,7 +104,7 @@ function cardClickHandler(event) {
                     case 6:
                     case 14:
                     case 23:
-                        whichQuarter++
+                        whichQuarter++                        
                         theModal('quarter-modal');
                         break;
                     case maxMatched:
@@ -252,6 +255,7 @@ function theModal(whichModal) {
     });
 
     $(cQuit).on('click', function () {
+        // gameSong.pause();
         $('.modal').hide();
         $(".modal-content").remove();
         canClickMouse = false;
@@ -265,6 +269,7 @@ function resetGame() {
     quarterMatched = 0;
     uAttempts = 0;
     whichQuarter = 1
+    // gameSong.play();
     numDowns = 1;
     $('.modal').hide();
     $(".modal-content").remove();
@@ -276,6 +281,7 @@ function replayWithStats() {
     cardClickOne = null;
     cardClickTwo = null;
     whichQuarter = 1;
+    // gameSong.play();
     numDowns = 1
     quarterMatched = 0;
     $('.modal').hide();
@@ -288,6 +294,9 @@ function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
     numDowns = 1;
+    // debugger;
+    // gameSong.pause();
+    // playMusic(whichQuarterString).play();
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
@@ -311,37 +320,21 @@ function welcomeModal() {
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
-    playMusic('0'); // *************************** START HERE, NEED TO THREAD WELCOME MUSIC INTO MUSIC FUNCTION AND SEE WHERE THIS MODAL FUNCTION IS CALLED BECAUSE THE SOUND MODAL WILL HAVE TO SHOW UP FIRST
+    var welcomeSong = playMusic('0');
+    welcomeSong.play(); // *************************** START HERE, NEED TO THREAD WELCOME MUSIC INTO MUSIC FUNCTION AND SEE WHERE THIS MODAL FUNCTION IS CALLED BECAUSE THE SOUND MODAL WILL HAVE TO SHOW UP FIRST
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
         var letsPlaySounds = ['lets-play1','lets-play2']; 
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
-        // playSounds('welcome-modal').pause();
-        playSounds(clickLetsPlay);
+        // welcomeSong.pause();
+        // playSounds(clickLetsPlay);
+        // gameSong.play();
     });
 
 }
 
 function soundModal() {
-    // var doYouWantSound = `<div class="modal-content">
-    //                         <div class='sound-modal'>
-    //                             <h2>Choose your sound preferences:</h2>
-    //                             <div> (Click to change setting) </div>
-    //                                 <div class = "sound-pref">
-    //                                     Sound F/X
-    //                                     <div id = "sfx-toggle">slider on-off</div>
-    //                                 </div>
-    //                                 <div class = "sound-pref">
-    //                                     Music
-    //                                     <div id = "music-toggle">slider on-off</div>
-    //                                 </div>
-
-    //                                 <button id = "sounds-go">OK</button>
-
-    //                         </div>
-    //                       </div>`
-
     var doYouWantSound = `<div class="modal-content">
                             <div class='sound-modal'>
                                 <h2>Choose your sound preferences:</h2>
@@ -382,11 +375,6 @@ function soundValidate () {
     }    
         $(".modal-content").remove();
         welcomeModal();
-
-    //click handler for $('.sfx') = if soundOn, soundOn=false, else soundOn=true; if musicOon, musicOn=false, else musicOn=true
-    //click handler for $('.music')
-    //ok lets go button that executes welcome modal, --plays welcome music, sets soundOn and musicOn to TRUE
-    //welcomeModal();
 }
 
 function playSounds(soundFile) {
@@ -403,6 +391,6 @@ function playMusic(gameMusicQuarter) {
     if (!musicOn) {
         return;
     }
-    gamePlayMusic.loop = true;
-    gamePlayMusic.play();
+    // gamePlayMusic.loop = true;
+    return gamePlayMusic;
 }
