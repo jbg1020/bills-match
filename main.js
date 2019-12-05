@@ -20,7 +20,6 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
                   'a','b','c','d','e','f','g','h','i','j'];
 
 var canClickMouse = true;
-var welcomeMusic = new Audio(`./sounds/welcome-modal.mp3`);
 var soundOn = null;
 var musicOn = null;
 
@@ -312,54 +311,98 @@ function welcomeModal() {
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
-    welcomeMusic.play(); // *************************** START HERE, NEED TO THREAD WELCOME MUSIC INTO MUSIC FUNCTION AND SEE WHERE THIS MODAL FUNCTION IS CALLED BECAUSE THE SOUND MODAL WILL HAVE TO SHOW UP FIRST
+    playMusic('0'); // *************************** START HERE, NEED TO THREAD WELCOME MUSIC INTO MUSIC FUNCTION AND SEE WHERE THIS MODAL FUNCTION IS CALLED BECAUSE THE SOUND MODAL WILL HAVE TO SHOW UP FIRST
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
         var letsPlaySounds = ['lets-play1','lets-play2']; 
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
-        welcomeMusic.pause();
+        // playSounds('welcome-modal').pause();
         playSounds(clickLetsPlay);
     });
 
 }
 
 function soundModal() {
+    // var doYouWantSound = `<div class="modal-content">
+    //                         <div class='sound-modal'>
+    //                             <h2>Choose your sound preferences:</h2>
+    //                             <div> (Click to change setting) </div>
+    //                                 <div class = "sound-pref">
+    //                                     Sound F/X
+    //                                     <div id = "sfx-toggle">slider on-off</div>
+    //                                 </div>
+    //                                 <div class = "sound-pref">
+    //                                     Music
+    //                                     <div id = "music-toggle">slider on-off</div>
+    //                                 </div>
+
+    //                                 <button id = "sounds-go">OK</button>
+
+    //                         </div>
+    //                       </div>`
+
     var doYouWantSound = `<div class="modal-content">
                             <div class='sound-modal'>
                                 <h2>Choose your sound preferences:</h2>
+                                    <div class = "sound-pref">
+                                        <input type="checkbox" id="sfx" checked> Sound F/X<br>
+                                    </div>
+                                    <div class = "sound-pref">
+                                        <input type="checkbox" id="music" checked> Music
+                                    </div>
 
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitches">
-                                    <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
-                                </div>    
-
-                                    <button id = "sounds-go">OK</button>
-
+                                    <input type = "submit" id = "sounds-go" value = "Go">
                             </div>
-                          </div>`
+                        </div>`
+
+
     $(doYouWantSound).appendTo('.modal');
     $('.modal').show();
+    $('#sounds-go').on('click', function () {
+        soundValidate();
+    });
+
+}
+
+function soundValidate () {
+    var sFxToggle = document.getElementById("sfx").checked;
+    var musicToggle = document.getElementById("music").checked;
+
+    if (sFxToggle) {
+        soundOn = true;
+    } else {
+        soundOn = false;
+    }
+
+    if (musicToggle) {
+        musicOn = true;
+    } else {
+        musicOn = false;
+    }    
+        $(".modal-content").remove();
+        welcomeModal();
 
     //click handler for $('.sfx') = if soundOn, soundOn=false, else soundOn=true; if musicOon, musicOn=false, else musicOn=true
     //click handler for $('.music')
     //ok lets go button that executes welcome modal, --plays welcome music, sets soundOn and musicOn to TRUE
-
+    //welcomeModal();
 }
 
 function playSounds(soundFile) {
+    var soundFX = new Audio(`./sounds/${soundFile}.mp3`);
     if (!soundOn) {
         return;
     }
-    new Audio(`./sounds/${soundFile}.mp3`).play();
+    soundFX.play();
 }
 
 function playMusic(gameMusicQuarter) {
     var gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
 
-    // if (!musicOn) {
-    //     return;
-    // }
-    // gamePlayMusic.loop = true;
-    // gamePlayMusic.play();
+    if (!musicOn) {
+        return;
+    }
+    gamePlayMusic.loop = true;
+    gamePlayMusic.play();
 }

@@ -283,7 +283,27 @@ img {
 } */
 
 .sound-modal h2 {
+    margin-left: 13%;
     text-align: center;
+    font-size: 7vh;
+}
+
+.sound-pref {
+    font-size: 6vh;
+    text-align: left;
+    height: 9vh;
+    color: rgb(255, 79, 79);
+}
+
+#sounds-go {
+    font-family: 'Modal', Arial, sans-serif;
+    /* height: 15vh; */
+    /* width: 15vw; */
+    /* font-size: 9vh;  */
+}
+
+input {
+    zoom: 3;
 }
 
 .options-container{
