@@ -150,12 +150,16 @@ function cardClickHandler(event) {
 }
 
 function flipBackMismatch() {
-    cardClickOne.prev().removeClass("hidden");
-    cardClickTwo.prev().removeClass("hidden");
-    console.log("No match!");
-    cardClickOne = null;
-    cardClickTwo = null;
-    canClickMouse = true;
+    if (!cardClickOne || !cardClickTwo) {
+        return;
+    }
+        cardClickOne.prev().removeClass("hidden");
+        cardClickTwo.prev().removeClass("hidden");
+        console.log("No match!");
+        cardClickOne = null;
+        cardClickTwo = null;
+        canClickMouse = true;
+
 }
 
 function calculateAccuracy() {
