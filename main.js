@@ -321,13 +321,13 @@ function welcomeModal() {
     $(openModal).appendTo('.modal');
     $('.modal').show();
     var welcomeSong = playMusic('0');
-    welcomeSong.play(); // *************************** START HERE, NEED TO THREAD WELCOME MUSIC INTO MUSIC FUNCTION AND SEE WHERE THIS MODAL FUNCTION IS CALLED BECAUSE THE SOUND MODAL WILL HAVE TO SHOW UP FIRST
+    welcomeSong.play();
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
         var letsPlaySounds = ['lets-play1','lets-play2']; 
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
-        // welcomeSong.pause();
+        welcomeSong.pause();
         // playSounds(clickLetsPlay);
         // gameSong.play();
     });
