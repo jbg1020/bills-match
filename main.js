@@ -22,7 +22,7 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
 var canClickMouse = true;
 var soundOn = null;
 var musicOn = null;
-var whichQuarterString = whichQuarter.toString();
+// var whichQuarterString = whichQuarter.toString();
 var gamePlayMusic = null;
 // var gameSong = playMusic(whichQuarterString);
 
@@ -83,10 +83,6 @@ function cardClickHandler(event) {
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 var gotFirstDown = `first-down${Math.floor(Math.random() * 7) + 1}`;
                 if (quarterMatched===5 || quarterMatched===13 || quarterMatched===22) {
-                    // gameSong.pause();
-                    // playMusic('1').pause();
-                    // playMusic(whichQuarterString).pause();
-                    // playMusic(gameMusicQuarter);
                     playSounds('test'); // ********** END OF QUARTER SOUND HERE
                 } else if (numDowns < 4) {
                     playSounds(gotFirstDown);
@@ -125,8 +121,7 @@ function cardClickHandler(event) {
                 }
                 if (numDowns > 4) {
                     theModal('lost-modal');
-                    // playMusic(whichQuarterString).stop();
-                    // play 'losing' sound here
+                    // play 'losing' sound here // it's being played in the swtch statement for greetings in modal function
                     switch (whichQuarter) {
                         case 1:
                             quarterMatched = 0;
@@ -218,8 +213,7 @@ function addSuffix () {
 
 function theModal(whichModal) {
     var greeting = null;
-    playMusic(whichQuarterString);
-    // playMusic(whichQuarterString).pause();
+    playMusic(whichQuarter.toString());
     switch (whichModal) {
         case 'lost-modal':
             greeting = 'You Missed 4th Down! Try again?';
@@ -261,7 +255,6 @@ function theModal(whichModal) {
     });
 
     $(cQuit).on('click', function () {
-        // gameSong.pause();
         $('.modal').hide();
         $(".modal-content").remove();
         canClickMouse = false;
@@ -275,7 +268,7 @@ function resetGame() {
     quarterMatched = 0;
     uAttempts = 0;
     whichQuarter = 1;
-    // gameSong.play();
+    playMusic(whichQuarter.toString());
     numDowns = 1;
     $('.modal').hide();
     $(".modal-content").remove();
@@ -287,7 +280,7 @@ function replayWithStats() {
     cardClickOne = null;
     cardClickTwo = null;
     whichQuarter = 1;
-    // gameSong.play();
+    playMusic(whichQuarter.toString());
     numDowns = 1
     quarterMatched = 0;
     $('.modal').hide();
@@ -300,9 +293,7 @@ function continueGame() {
     cardClickOne = null;
     cardClickTwo = null;
     numDowns = 1;
-    // debugger;
-    // gameSong.pause();
-    // playMusic(whichQuarterString).play();
+    playMusic(whichQuarter.toString());
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
@@ -334,8 +325,8 @@ function welcomeModal() {
         var letsPlaySounds = ['lets-play1','lets-play2']; 
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
         welcomeSong.pause();
+        playMusic(whichQuarter.toString());
         // playSounds(clickLetsPlay);
-        playMusic(whichQuarterString);
     });
 
 }
@@ -398,18 +389,12 @@ function playMusic(gameMusicQuarter) {
 
     if (gamePlayMusic) {
         gamePlayMusic.pause();
-        return;
+        gamePlayMusic = null;
+        return
     }
     gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
 
     gamePlayMusic.loop = true;
     return gamePlayMusic.play();
-    // if (!gamePlayMusic.paused) {
-    //     gamePlayMusic.pause();
-    // } else {
-    //     gamePlayMusic.play();
-    // }
-
-    // playMusic(whichQuarterString)
     
 }
