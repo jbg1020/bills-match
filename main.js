@@ -22,9 +22,7 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
 var canClickMouse = true;
 var soundOn = null;
 var musicOn = null;
-// var whichQuarterString = whichQuarter.toString();
 var gamePlayMusic = null;
-// var gameSong = playMusic(whichQuarterString);
 
 function initializeApp() {
     shuffleCards();
@@ -83,7 +81,7 @@ function cardClickHandler(event) {
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 var gotFirstDown = `first-down${Math.floor(Math.random() * 7) + 1}`;
                 if (quarterMatched===5 || quarterMatched===13 || quarterMatched===22) {
-                    playSounds('test'); // ********** END OF QUARTER SOUND HERE
+                    playSounds('beat-quarter');
                 } else if (numDowns < 4) {
                     playSounds(gotFirstDown);
                 } else {
@@ -225,6 +223,8 @@ function theModal(whichModal) {
             break;
         case 'won-modal':
             greeting = 'You Won!!!';
+            playSounds('win-sound');
+            playMusic('win-song');
             break;
         case 'quarter-modal':
             greeting = `Ready for the ${whichQuarter+addSuffix()} quarter?`;
@@ -330,7 +330,7 @@ function welcomeModal() {
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
         welcomeSong.pause();
         playMusic(whichQuarter.toString());
-        // playSounds(clickLetsPlay);
+        playSounds(clickLetsPlay);
     });
 
 }
@@ -391,14 +391,14 @@ function playMusic(gameMusicQuarter) {
         return;
     }
 
-    if (gamePlayMusic) {
+    if (gamePlayMusic) {  //make a !file.paused here
         gamePlayMusic.pause();
         gamePlayMusic = null;
-        return
-    }
+    } else {
     gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
 
     gamePlayMusic.loop = true;
     return gamePlayMusic.play();
+    }
     
 }
