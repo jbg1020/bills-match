@@ -106,8 +106,6 @@ function cardClickHandler(event) {
                     playSounds('fourth-down');
                 }
                 if (numDowns > 4) {
-                    theModal('lost-modal');
-                    // play 'losing' sound here // it's being played in the swtch statement for greetings in modal function
                     switch (whichQuarter) {
                         case 1:
                             quarterMatched = 0;
@@ -122,6 +120,8 @@ function cardClickHandler(event) {
                             quarterMatched = 23;
                             break;
                     }
+                    playSounds('missed-4th');
+                    setTimeout(theModal, 1000,'lost-modal');
                 }
                 // console.log('card2::', cardClickTwo.css('background-image'))
                 setTimeout(flipBackMismatch, 1000);
@@ -204,7 +204,6 @@ function theModal(whichModal) {
     switch (whichModal) {
         case 'lost-modal':
             greeting = 'You Missed 4th Down! Try again?';
-            playSounds('missed-4th');
             break;
         case 'won-modal':
             greeting = 'You Won!!!';
