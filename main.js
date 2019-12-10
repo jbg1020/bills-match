@@ -12,19 +12,14 @@ var whichQuarter = 1;
 var cardArray = null;
 
 var cardArray1 = ['a','b','c','d','e','f','a','b','c','d','e','f'];
-var cardArray2 = ['a','b','c','d','e','f','g','h',
-                  'a','b','c','d','e','f','g','h'];
-var cardArray3 = ['a','b','c','d','e','f','g','h','i',
-                  'a','b','c','d','e','f','g','h','i'];
-var cardArray4 = ['a','b','c','d','e','f','g','h','i','j',
-                  'a','b','c','d','e','f','g','h','i','j'];
+var cardArray2 = ['a','b','c','d','e','f','g','h','a','b','c','d','e','f','g','h'];
+var cardArray3 = ['a','b','c','d','e','f','g','h','i','a','b','c','d','e','f','g','h','i'];
+var cardArray4 = ['a','b','c','d','e','f','g','h','i','j','a','b','c','d','e','f','g','h','i','j'];
 
 var canClickMouse = true;
 var soundOn = null;
 var musicOn = null;
-// var whichQuarterString = whichQuarter.toString();
 var gamePlayMusic = null;
-// var gameSong = playMusic(whichQuarterString);
 
 function initializeApp() {
     shuffleCards();
@@ -83,17 +78,12 @@ function cardClickHandler(event) {
             if (cardClickOne.css('background-image') === cardClickTwo.css('background-image')) {
                 var gotFirstDown = `first-down${Math.floor(Math.random() * 7) + 1}`;
                 if (quarterMatched===5 || quarterMatched===13 || quarterMatched===22) {
-                    playSounds('test'); // ********** END OF QUARTER SOUND HERE
+                    playSounds('beat-quarter');
                 } else if (numDowns < 4) {
                     playSounds(gotFirstDown);
                 } else {
                     playSounds('made-on-4th1')
                 }
-                // if (numDowns < 4) {
-                //     playSounds(gotFirstDown);
-                // } else {
-                //     playSounds('made-on-4th1');
-                // }
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
@@ -225,6 +215,8 @@ function theModal(whichModal) {
             break;
         case 'won-modal':
             greeting = 'You Won!!!';
+            playMusic('5');
+            playSounds('win-sound');
             break;
         case 'quarter-modal':
             greeting = `Ready for the ${whichQuarter+addSuffix()} quarter?`;
@@ -255,6 +247,9 @@ function theModal(whichModal) {
     });
 
     $(bRedo).on('click', function () {
+        if (gamePlayMusic) {
+            playMusic('5');
+        }
         resetGame();
     });
 
@@ -284,6 +279,7 @@ function replayWithStats() {
     cardClickOne = null;
     cardClickTwo = null;
     whichQuarter = 1;
+    playMusic('5');
     playMusic(whichQuarter.toString());
     numDowns = 1
     quarterMatched = 0;
@@ -321,16 +317,15 @@ function welcomeModal() {
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
-    var welcomeSong = new Audio(`./sounds/gameplay-0.mp3`);
-    welcomeSong.play();
+    playMusic('0');
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
         var letsPlaySounds = ['lets-play1','lets-play2']; 
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
-        welcomeSong.pause();
+        playMusic('0');
         playMusic(whichQuarter.toString());
-        // playSounds(clickLetsPlay);
+        playSounds(clickLetsPlay);
     });
 
 }
@@ -391,14 +386,14 @@ function playMusic(gameMusicQuarter) {
         return;
     }
 
-    if (gamePlayMusic) {
+    if (gamePlayMusic) { 
         gamePlayMusic.pause();
         gamePlayMusic = null;
-        return
-    }
-    gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
+    } else {
+    gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);
 
     gamePlayMusic.loop = true;
     return gamePlayMusic.play();
+    }
     
 }
