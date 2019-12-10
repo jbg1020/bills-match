@@ -19,9 +19,7 @@ var cardArray4 = ['a','b','c','d','e','f','g','h','i','j','a','b','c','d','e','f
 var canClickMouse = true;
 var soundOn = null;
 var musicOn = null;
-var welcomeSong = new Audio(`./sounds/gameplay-0.mp3`);   //  THREAD THIS THROUGH MUSIC FUNCTION ********************************************************************************************************
 var gamePlayMusic = null;
-var winSong = new Audio(`./sounds/win-song.mp3`);   //  THREAD THIS THROUGH MUSIC FUNCTION ********************************************************************************************************
 
 function initializeApp() {
     shuffleCards();
@@ -86,11 +84,6 @@ function cardClickHandler(event) {
                 } else {
                     playSounds('made-on-4th1')
                 }
-                // if (numDowns < 4) {
-                //     playSounds(gotFirstDown);
-                // } else {
-                //     playSounds('made-on-4th1');
-                // }
                 uMatched++;
                 quarterMatched++;
                 numDowns = 1;
@@ -222,7 +215,7 @@ function theModal(whichModal) {
             break;
         case 'won-modal':
             greeting = 'You Won!!!';
-            winSong.play();  //  THREAD THIS THROUGH MUSIC FUNCTION ********************************************************************************************************
+            playMusic('5');
             playSounds('win-sound');
             break;
         case 'quarter-modal':
@@ -254,6 +247,9 @@ function theModal(whichModal) {
     });
 
     $(bRedo).on('click', function () {
+        if (gamePlayMusic) {
+            playMusic('5');
+        }
         resetGame();
     });
 
@@ -271,7 +267,6 @@ function resetGame() {
     quarterMatched = 0;
     uAttempts = 0;
     whichQuarter = 1;
-    winSong.pause();  //  THREAD THIS THROUGH MUSIC FUNCTION ********************************************************************************************************
     playMusic(whichQuarter.toString());
     numDowns = 1;
     $('.modal').hide();
@@ -284,7 +279,7 @@ function replayWithStats() {
     cardClickOne = null;
     cardClickTwo = null;
     whichQuarter = 1;
-    winSong.pause(); //  THREAD THIS THROUGH MUSIC FUNCTION ********************************************************************************************************
+    playMusic('5');
     playMusic(whichQuarter.toString());
     numDowns = 1
     quarterMatched = 0;
@@ -322,13 +317,13 @@ function welcomeModal() {
 
     $(openModal).appendTo('.modal');
     $('.modal').show();
-    welcomeSong.play();  //  THREAD THIS THROUGH MUSIC FUNCTION ********************************************************************************************************
+    playMusic('0');
     $('#play-button').on('click', function () {
         $('.modal').hide();
         $(".modal-content").remove();
         var letsPlaySounds = ['lets-play1','lets-play2']; 
         var clickLetsPlay = letsPlaySounds[Math.floor(Math.random()*letsPlaySounds.length)];
-        welcomeSong.pause();   //  THREAD THIS THROUGH MUSIC FUNCTION ********************************************************************************************************
+        playMusic('0');
         playMusic(whichQuarter.toString());
         playSounds(clickLetsPlay);
     });
@@ -370,7 +365,6 @@ function soundValidate () {
     }
 
     if (musicToggle) {
-        // maybe define win/welcome songs here to run through a separate function?
         musicOn = true;
     } else {
         musicOn = false;
@@ -392,13 +386,11 @@ function playMusic(gameMusicQuarter) {
         return;
     }
 
-    // ???? IF QTR-MATCHED == MAXMATCHED, PLAY WIN-SONG, ELSE :...OR WHICHQUARTER++???
-
     if (gamePlayMusic) { 
         gamePlayMusic.pause();
         gamePlayMusic = null;
     } else {
-    gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);  //name files gameplay-1, gameplay-2 etc call by playMusic(whichQuarter)
+    gamePlayMusic = new Audio(`./sounds/gameplay-${gameMusicQuarter}.mp3`);
 
     gamePlayMusic.loop = true;
     return gamePlayMusic.play();
