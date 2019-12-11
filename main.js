@@ -225,7 +225,6 @@ function theModal(whichModal) {
                         </div>
                     </div>
                 </div>`
-    // maybe do above var like $('<.modal-content>').appendTo('.modal')
     $(htmlModal).appendTo('.modal');
     $('.modal').show();
     var aCont = $('.continue');
@@ -259,7 +258,7 @@ function resetGame() {
     $('.modal').hide();
     $(".modal-content").remove();
     initializeApp();
-    displayStats();  // **what happens when removing this and quit/reset game
+    displayStats();
 }
 
 function replayWithStats() {
