@@ -125,7 +125,7 @@ main {
 } /* mess with the container /card relationship stuff*/
 
 .back {
-    background-image: url('./images/back.PNG');
+    background-image: url('./images/back.png');
     position: absolute;
     z-index: 1;
 }
