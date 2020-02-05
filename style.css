@@ -285,7 +285,8 @@ img {
     font-size: 2.35rem;
     text-align: left;
     height: 9vh;
-    color: rgb(255, 79, 79);
+    color: rgb(126, 0, 0);
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 #sounds-go {
@@ -347,16 +348,45 @@ input {
     h1{
         font-size: 3rem;
     }
-}
-
-@media screen and (max-width: 813px) {
-    h1{
+    h2{
+        font-size: 1.5rem;
+    }
+    aside{
+        height: 50%;
+    }
+    .stats{
         font-size: 3rem;
     }
-    /* 
-    .modal
-    .stats
-    .stat-box
-    card bgrounds
-    */
+    .stat-box{
+        font-size: 1.8rem;
+    }
+    .sound-modal h2{
+        font-size: 2rem;
+    }
+    .sound-pref{
+        font-size: 2rem;
+    }
+    input{
+        zoom:1.9;
+        margin-top: 5px;
+        margin-left: 33px;
+    }
+    .instruction-container{
+        width:245%;
+    }
+    .modal-content{
+        font-size: 1rem;
+    }
+    #play-button{
+        font-size: 1.3rem;
+        width: 84vh;
+        height: 15vh;
+        margin-top: 2%;
+        margin-left: 47%;
+    }
+    .options-buttons{
+        width: 113%;
+        height: 33%;
+        font-size: 1.6rem;
+    }
 }
