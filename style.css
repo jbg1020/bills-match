@@ -342,3 +342,21 @@ input {
     background-color: maroon;
     color: white;
 }
+
+@media screen and (max-width: 813px) {
+    h1{
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 813px) {
+    h1{
+        font-size: 3rem;
+    }
+    /* 
+    .modal
+    .stats
+    .stat-box
+    card bgrounds
+    */
+}
