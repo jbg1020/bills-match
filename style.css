@@ -28,7 +28,7 @@ h1 {
     font-family: 'Bills Mafia', Arial, sans-serif;
     color: rgb(156, 0, 0);
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    font-size: 8vh;
+    font-size: 5rem;
     margin: 0;
 }
 
@@ -47,12 +47,12 @@ aside {
 .stats {
     color: white;
     /* border: 1px solid green; */
-    font-size: 8vh;/*2.5rem;*/
+    font-size: 4rem;
 }
 
 .stat-box {
     color: gold;
-    font-size: 4.5vh;
+    font-size: 2rem;
     /* border: 1px solid blue; */
 }
 
@@ -203,21 +203,20 @@ main {
     /* height: 100%; */
     margin: 3% auto; /* 3% from the top and centered */
     width: 80%; /* Could be more or less, depending on screen size */
-    font-size: 3vh;
+    font-size: 1.5rem;
     /* background-image: url('./images/welcome-bg.jpg');
     background-size: cover; */
   }
 
   .welcome-modal {
     color: black;
-    /* font-size: 3vh; */
     text-align: center;
     width: 45%;
 }
 
 h2 {
     width: 43vw;
-    font-size: 5vh;
+    font-size: 2.7rem;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
@@ -239,7 +238,7 @@ h2 {
 #play-button {
     border: 1px solid red;
     cursor: pointer;
-    font-size: 5vh;
+    font-size: 2.3rem;
     width: 63vh;
     height: 16vh;
     margin-top: 12%;
@@ -256,50 +255,42 @@ h2 {
 img {
     float: right;
     height: 34vh;
+    margin-left: -15%;
 }
  .lost-modal {
     color: maroon;
-    /* font-size: 380%; */
     text-align: center;
     width: 45%;
 }
 
 .won-modal {
     color: darkgreen;
-    /* font-size: 380%; */
     text-align: center;
     width: 45%;
 }
 
 .quarter-modal {
     color: black;
-    /* font-size: 380%; */
     text-align: center;
     width: 45%;
 }
 
-/* .sound-modal {
-    height: 50%;
-} */
-
 .sound-modal h2 {
     margin-left: 13%;
     text-align: center;
-    font-size: 7vh;
+    font-size: 2.35rem;
 }
 
 .sound-pref {
-    font-size: 6vh;
+    font-size: 2.35rem;
     text-align: left;
     height: 9vh;
-    color: rgb(255, 79, 79);
+    color: rgb(126, 0, 0);
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 #sounds-go {
     font-family: 'Modal', Arial, sans-serif;
-    /* height: 15vh; */
-    /* width: 15vw; */
-    /* font-size: 9vh;  */
 }
 
 input {
@@ -319,7 +310,7 @@ input {
     margin: auto;
     margin-top: 3%;
     font-family: 'Modal', Arial, sans-serif;
-    font-size: 6vh;
+    font-size: 2.6rem;
     border-radius: 20px;
 }
 
@@ -351,4 +342,51 @@ input {
 .quit:hover {
     background-color: maroon;
     color: white;
+}
+
+@media screen and (max-width: 813px) {
+    h1{
+        font-size: 3rem;
+    }
+    h2{
+        font-size: 1.5rem;
+    }
+    aside{
+        height: 50%;
+    }
+    .stats{
+        font-size: 3rem;
+    }
+    .stat-box{
+        font-size: 1.8rem;
+    }
+    .sound-modal h2{
+        font-size: 2rem;
+    }
+    .sound-pref{
+        font-size: 2rem;
+    }
+    input{
+        zoom:1.9;
+        margin-top: 5px;
+        margin-left: 33px;
+    }
+    .instruction-container{
+        width:245%;
+    }
+    .modal-content{
+        font-size: 1rem;
+    }
+    #play-button{
+        font-size: 1.3rem;
+        width: 84vh;
+        height: 15vh;
+        margin-top: 2%;
+        margin-left: 47%;
+    }
+    .options-buttons{
+        width: 113%;
+        height: 33%;
+        font-size: 1.6rem;
+    }
 }
