@@ -324,6 +324,7 @@ function soundModal() {
                                     <div class = "sound-pref">
                                         <input type="checkbox" id="music" checked> Music
                                     </div>
+                                    <div class = "sound-pref" id="view-pref">Best viewed in widescreen (tilt your phone sideways!!) </div>
 
                                     <input type = "submit" id = "sounds-go" value = "Go">
                             </div>
