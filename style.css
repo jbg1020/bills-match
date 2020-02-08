@@ -222,6 +222,7 @@ h2 {
 
 .instr-heading {
     color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .instruction-container {
     width: 95vh;
@@ -344,6 +345,11 @@ input {
     background-color: maroon;
     color: white;
 }
+#view-pref {
+    font-size: 1rem;
+    margin-top: 8%;
+    color: green;
+}
 
 @media screen and (max-width: 813px) {
     h1{
@@ -460,7 +466,7 @@ input {
         font-size: 2rem;
     }
     .sound-pref{
-        font-size: 2rem;
+        font-size: 1.7rem;
     }
     input{
         zoom:1.9;
@@ -468,21 +474,36 @@ input {
         margin-left: 33px;
     }
     .instruction-container{
-        width:245%;
+        width:244%;
     }
     .modal-content{
-        font-size: 1rem;
+        font-size: .9rem;
     }
     #play-button{
         font-size: 1.3rem;
-        width: 84vh;
-        height: 15vh;
+        width: 115vh;
+        height: 10vh;
         margin-top: 2%;
-        margin-left: 47%;
+        margin-left: -2%;
     }
     .options-buttons{
         width: 113%;
         height: 33%;
         font-size: 1.6rem;
+    }
+}
+@media screen and (max-width: 475px) {
+    #view-pref{
+        animation:blinkingText 0.8s infinite;
+    }
+    @keyframes blinkingText{
+        0%{     color: green;    }
+        49%{    color: red; }
+        60%{    color: transparent; }
+        99%{    color:transparent;  }
+        100%{   color: green;    }
+    }
+    input{
+        margin-top: 11%;
     }
 }
